@@ -109,7 +109,15 @@ const Navbar = () => {
 
           {/* Mobile Button */}
           <div className="flex items-center gap-2 mt-4">
-            <button className="bg-white hover:bg-purple-500 hover:text-white text-black text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition">
+            <button
+              onClick={() => {
+                const section = document.getElementById("shot-send");
+                if (section) {
+                  section.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="bg-white hover:bg-purple-500 hover:text-white text-black text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition"
+            >
               START A PROJECT
             </button>
             <div className="bg-white hover:bg-purple-500 hover:text-white text-black p-2 rounded-full cursor-pointer transition">
