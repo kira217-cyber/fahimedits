@@ -12,14 +12,20 @@ const Footer = () => {
       transition={{ duration: 1 }}
       className="bg-[#0A0217] text-white px-6 md:px-16 lg:px-24 py-12 rounded-t-3xl"
     >
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Left Section */}
         <div>
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 leading-snug">
             Ready to take <br /> the next step?
           </h2>
-          <button className="flex items-center gap-2 hover:bg-purple-500 hover:text-white cursor-pointer bg-white text-black px-5 py-2 rounded-full font-semibold transition">
-            START A PROJECT <span className="text-xl">→</span>
+          <button onClick={() => {
+              const section = document.getElementById("shot-send");
+              if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+              }
+            }} className="flex items-center gap-2 hover:bg-purple-500 hover:text-white cursor-pointer bg-white text-black px-5 py-2 rounded-full font-semibold transition">
+            START YOUR PROJECT <span className="text-xl">→</span>
           </button>
         </div>
 
@@ -28,7 +34,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-3">Learn</h3>
           <ul className="space-y-2 text-gray-300">
             <Link className="cursor-pointer hover:text-purple-500 hover:underline" to={'/'}><li>Home</li></Link> 
-            <Link className="cursor-pointer hover:text-purple-500 hover:underline" to={'/portfolio'}><li>Portfolio</li></Link> 
+            <Link className="cursor-pointer hover:text-purple-500 hover:underline" to={'/our-work'}><li>Our Work</li></Link> 
             <Link className="cursor-pointer hover:text-purple-500 hover:underline" to={'/process'}><li>Process</li></Link> 
             <Link className="cursor-pointer hover:text-purple-500 hover:underline" to={'/about'}><li>About Us</li></Link> 
             <Link className="cursor-pointer hover:text-purple-500 hover:underline" to={'/contact'}><li>Contact</li></Link> 
@@ -96,6 +102,7 @@ const Footer = () => {
           Copyright © FahimEdits <br />
           Designed by raihan | Powered by FahimEdits
         </p>
+      </div>
       </div>
     </motion.footer>
   );

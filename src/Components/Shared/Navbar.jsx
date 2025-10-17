@@ -15,7 +15,7 @@ const Navbar = () => {
   // ✅ path list with correct routes
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Portfolio", path: "/portfolio" },
+    { name: "Our Work", path: "/our-work" },
     { name: "Process", path: "/process" },
     { name: "About Us", path: "/about" },
     { name: "Contact", path: "/contact" },
@@ -55,8 +55,16 @@ const Navbar = () => {
 
         {/* Start a Project Button */}
         <div className="flex items-center gap-2">
-          <button className="bg-white cursor-pointer text-black text-xs font-semibold px-4 py-2 rounded-full hover:bg-purple-500 hover:text-white transition">
-            START A PROJECT
+          <button
+            onClick={() => {
+              const section = document.getElementById("shot-send");
+              if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="bg-white cursor-pointer text-black text-xs font-semibold px-4 py-2 rounded-full hover:bg-purple-500 hover:text-white transition"
+          >
+            START YOUR PROJECT
           </button>
           <div className="bg-white cursor-pointer hover:bg-purple-500 hover:text-white text-black p-2 rounded-full  transition">
             <FiArrowRight />
