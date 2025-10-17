@@ -33,86 +33,80 @@ const OurWork = () => {
     speed: 800,
     beforeChange: (current, next) => setCenterIndex(next),
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
+      { breakpoint: 1280, settings: { slidesToShow: 2 } },
       { breakpoint: 768, settings: { slidesToShow: 1 } },
     ],
   };
 
-  // ✅ Handle next and previous navigation
-  const goNext = () => {
-    sliderRef.current.slickNext();
-  };
-
-  const goPrev = () => {
-    sliderRef.current.slickPrev();
-  };
+  const goNext = () => sliderRef.current.slickNext();
+  const goPrev = () => sliderRef.current.slickPrev();
 
   return (
     <motion.section
       initial={{ opacity: 0, y: 60 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      className="py-16 md:py-32 px-6 md:px-16 lg:px-24 text-center bg-gradient-to-br from-white to-purple-50 relative"
+      className="py-12 sm:py-20 px-4 sm:px-8 md:px-12 lg:px-20 text-center bg-gradient-to-br from-white to-purple-50 relative"
     >
-     <div className="max-w-7xl mx-auto">
-       {/* Section Header */}
-      <div className="space-y-4 mb-12 ">
-        <span className="text-sm bg-purple-100 text-purple-600 px-4 py-1 rounded-full font-medium">
-          Video Editing Studio
-        </span>
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug">
-          Our Made <span className="text-purple-500">Video Projects</span>
-        </h2>
-        <p className="max-w-2xl mx-auto text-gray-600">
-          We craft stunning videos that inspire, engage, and tell powerful stories.
-        </p>
+      <div className="max-w-7xl mx-auto relative">
+        {/* Header */}
+        <div className="space-y-4 mb-10 sm:mb-14">
+          <span className="text-xs sm:text-sm bg-purple-100 text-purple-600 px-4 py-1 rounded-full font-medium">
+            Video Editing Studio
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-snug">
+            Our Made <span className="text-purple-500">Video Projects</span>
+          </h2>
+          <p className="max-w-2xl mx-auto text-gray-600 text-sm sm:text-base">
+            We craft stunning videos that inspire, engage, and tell powerful stories.
+          </p>
+        </div>
+
+        {/* Arrows */}
+        <button
+          onClick={goPrev}
+          className="absolute cursor-pointer left-3 sm:left-6 md:left-10 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-purple-600 rounded-full p-2 sm:p-3 z-50 transition-transform hover:scale-110"
+        >
+          <FiChevronLeft size={22} />
+        </button>
+
+        <Slider ref={sliderRef} {...settings}>
+          {videos.map((video, index) => {
+            const isCenter = index === centerIndex;
+            const scale = isCenter
+              ? "scale-105 z-30 opacity-100"
+              : "scale-90 opacity-60";
+
+            return (
+              <motion.div
+                key={video.id}
+                className={`px-2 sm:px-3 py-6 transition-all duration-700 ease-in-out ${scale}`}
+              >
+                <div className="overflow-hidden shadow-xl bg-white border border-purple-100 hover:shadow-purple-200 transition-all duration-500 rounded-2xl">
+                  <div className="relative w-full aspect-video">
+                    <iframe
+                      src={video.embedUrl}
+                      title={`YouTube video ${video.id}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full rounded-2xl"
+                    ></iframe>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </Slider>
+
+        <button
+          onClick={goNext}
+          className="absolute cursor-pointer right-3 sm:right-6 md:right-10 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-purple-600 rounded-full p-2 sm:p-3 z-50 transition-transform hover:scale-110"
+        >
+          <FiChevronRight size={22} />
+        </button>
       </div>
-
-      {/* Left Arrow */}
-      <button
-        onClick={goPrev}
-        className="absolute cursor-pointer left-2 md:left-60 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-purple-600 rounded-full p-3 z-50 transition-transform hover:scale-110"
-      >
-        <FiChevronLeft size={24} />
-      </button>
-
-      {/* Video Slider */}
-      <Slider ref={sliderRef} {...settings}>
-        {videos.map((video, index) => {
-          const isCenter = index === centerIndex;
-          const scale = isCenter ? "scale-105 z-30 opacity-100" : "scale-90 opacity-50";
-
-          return (
-            <motion.div
-              key={video.id}
-              className={`px-3 py-8 transition-all duration-700 ease-in-out ${scale}`}
-            >
-              <div className="overflow-hidden shadow-xl bg-white border border-purple-100 hover:shadow-purple-200 transition-all duration-500 rounded-2xl">
-                <iframe
-                  width="100%"
-                  height="350"
-                  src={video.embedUrl}
-                  title={`YouTube video ${video.id}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                  className="w-full h-[450px]"
-                ></iframe>
-              </div>
-            </motion.div>
-          );
-        })}
-      </Slider>
-
-      {/* Right Arrow */}
-      <button
-        onClick={goNext}
-        className="absolute cursor-pointer right-2 md:right-60 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-purple-600 rounded-full p-3 z-50 transition-transform hover:scale-110"
-      >
-        <FiChevronRight size={24} />
-      </button>
-     </div>
     </motion.section>
   );
 };
