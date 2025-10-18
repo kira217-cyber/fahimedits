@@ -29,7 +29,7 @@ const Navbar = () => {
     >
       {/* Logo */}
       <Link to={"/"}>
-        <h1 className="text-xl md:text-2xl font-bold tracking-tight">
+        <h1 className="text-xl cursor-pointer md:text-2xl font-bold tracking-tight">
           Fahim<span className="text-purple-500">Edits</span>
         </h1>
       </Link>

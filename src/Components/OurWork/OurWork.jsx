@@ -20,10 +20,10 @@ const videos = [
 
 const OurWork = () => {
   const [centerIndex, setCenterIndex] = useState(0);
-  const [slidesToShow, setSlidesToShow] = useState(3); // Track slidesToShow dynamically
+  const [slidesToShow, setSlidesToShow] = useState(3);
   const sliderRef = useRef(null);
 
-  // Function to update slidesToShow based on window width
+  // Update slides based on screen width
   const updateSlidesToShow = () => {
     const width = window.innerWidth;
     if (width < 640) {
@@ -35,7 +35,7 @@ const OurWork = () => {
     }
   };
 
-  // Debounce function to limit resize event frequency
+  // Debounce resize for performance
   const debounce = (func, wait) => {
     let timeout;
     return (...args) => {
@@ -44,13 +44,11 @@ const OurWork = () => {
     };
   };
 
-  // Handle resize and initial load
   useEffect(() => {
-    updateSlidesToShow(); // Set initial slidesToShow
+    updateSlidesToShow();
     const handleResize = debounce(updateSlidesToShow, 100);
     window.addEventListener("resize", handleResize);
 
-    // Reset slider to first slide on load to avoid layout issues
     if (sliderRef.current) {
       sliderRef.current.slickGoTo(0);
     }
@@ -71,23 +69,18 @@ const OurWork = () => {
     beforeChange: (current, next) => setCenterIndex(next),
   };
 
-  const goNext = () => {
-    sliderRef.current.slickNext();
-  };
-
-  const goPrev = () => {
-    sliderRef.current.slickPrev();
-  };
+  const goNext = () => sliderRef.current?.slickNext();
+  const goPrev = () => sliderRef.current?.slickPrev();
 
   return (
     <motion.section
       initial={{ opacity: 0, y: 60 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      className="py-8 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-12 lg:px-24 text-center bg-gradient-to-br from-white to-purple-50 relative min-h-screen"
+      className="py-8 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-12 lg:px-24 text-center bg-gradient-to-br from-white to-purple-50 relative min-h-screen overflow-x-hidden"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
+      <div className="max-w-7xl mx-auto overflow-x-hidden relative">
+        {/* Header */}
         <div className="space-y-4 mb-8 sm:mb-12">
           <span className="text-xs sm:text-sm bg-purple-100 text-purple-600 px-3 sm:px-4 py-1 rounded-full font-medium">
             Video Editing Studio
@@ -103,12 +96,12 @@ const OurWork = () => {
         {/* Left Arrow */}
         <button
           onClick={goPrev}
-          className="absolute left-2 sm:left-4 md:left-8 lg:left-16 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-purple-600 rounded-full p-2 sm:p-3 z-50 transition-transform hover:scale-110"
+          className="absolute hover:bg-purple-500 cursor-pointer left-2 sm:left-4 md:left-8 lg:left-16 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-purple-600 hover:text-white rounded-full p-2 sm:p-3 z-50 transition-transform hover:scale-110 "
         >
-          <FiChevronLeft size={20} className="sm:w-6 sm:h-6" />
+          <FiChevronLeft size={20} className="sm:w-6 sm:h-6 " />
         </button>
 
-        {/* Video Slider */}
+        {/* Slider */}
         <Slider ref={sliderRef} {...settings}>
           {videos.map((video, index) => {
             const isCenter = index === centerIndex;
@@ -117,7 +110,7 @@ const OurWork = () => {
             return (
               <motion.div
                 key={video.id}
-                className={`px-2 sm:px-3 py-6 sm:py-8 transition-all duration-700 ease-in-out ${scale}`}
+                className={`px-2 sm:px-3 py-6 sm:py-8 transition-all duration-700 ease-in-out ${scale} overflow-hidden`}
               >
                 <div className="overflow-hidden shadow-xl bg-white border border-purple-100 hover:shadow-purple-200 transition-all duration-500 rounded-2xl">
                   <iframe
@@ -140,7 +133,7 @@ const OurWork = () => {
         {/* Right Arrow */}
         <button
           onClick={goNext}
-          className="absolute right-2 sm:right-4 md:right-8 lg:right-16 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-purple-600 rounded-full p-2 sm:p-3 z-50 transition-transform hover:scale-110"
+          className="absolute right-2 sm:right-4 md:right-8 lg:right-16 top-1/2 -translate-y-1/2 bg-white shadow-md hover:bg-purple-500 hover:text-white cursor-pointer hover:shadow-lg border border-purple-100 text-purple-600 rounded-full p-2 sm:p-3 z-50 transition-transform hover:scale-110"
         >
           <FiChevronRight size={20} className="sm:w-6 sm:h-6" />
         </button>
