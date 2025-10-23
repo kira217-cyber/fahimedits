@@ -5,14 +5,12 @@ import { FiArrowRight, FiMenu, FiX } from "react-icons/fi";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  // animation effect for navbar load
   const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 100);
   }, []);
 
-  // ✅ path list with correct routes
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Our Work", path: "/our-work" },
@@ -25,11 +23,13 @@ const Navbar = () => {
       initial={{ y: -40, opacity: 0 }}
       animate={isVisible ? { y: 0, opacity: 1 } : {}}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed max-w-7xl mx-auto top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-[90%] lg:w-[80%] bg-[#090016] text-white rounded-full shadow-lg px-6 py-3 flex justify-between items-center"
+      className="fixed max-w-7xl mx-auto top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-[90%] lg:w-[80%]
+      text-white rounded-full shadow-lg px-6 py-3 flex justify-between items-center
+      bg-white/25 backdrop-blur-lg border border-white/30" // ✅ Unified glass effect
     >
       {/* Logo */}
       <Link to={"/"}>
-        <h1 className="text-xl cursor-pointer md:text-2xl font-bold tracking-tight">
+        <h1 className="text-xl cursor-pointer md:text-2xl font-bold tracking-tight text-black">
           Fahim<span className="text-purple-500">Edits</span>
         </h1>
       </Link>
@@ -44,7 +44,7 @@ const Navbar = () => {
               `text-sm font-medium transition-colors ${
                 isActive
                   ? "text-purple-500"
-                  : "text-gray-200 hover:text-purple-400"
+                  : "text-gray-700 hover:text-purple-400"
               }`
             }
           >
@@ -61,11 +61,11 @@ const Navbar = () => {
                 section.scrollIntoView({ behavior: "smooth" });
               }
             }}
-            className="bg-white cursor-pointer text-black text-xs font-semibold px-4 py-2 rounded-full hover:bg-purple-500 hover:text-white transition"
+            className="bg-white cursor-pointer text-black text-xs font-semibold px-4 py-2 rounded-full border border-black/10 hover:bg-purple-500 hover:text-white transition"
           >
             START YOUR PROJECT
           </button>
-          <div className="bg-white cursor-pointer hover:bg-purple-500 hover:text-white text-black p-2 rounded-full  transition">
+          <div className="bg-white border border-black/10 cursor-pointer hover:bg-purple-500 hover:text-white text-black p-2 rounded-full transition">
             <FiArrowRight />
           </div>
         </div>
@@ -75,7 +75,7 @@ const Navbar = () => {
       <div className="md:hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="border border-gray-500 p-2 rounded-lg"
+          className="border border-gray-500 p-2 text-black rounded-lg bg-white/30 backdrop-blur-lg"
         >
           {isOpen ? <FiX /> : <FiMenu />}
         </button>
@@ -87,7 +87,8 @@ const Navbar = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="absolute top-[70px] left-0 w-full bg-[#090016] rounded-3xl py-5 px-6 flex flex-col gap-4 md:hidden"
+          className="absolute top-[70px] left-0 w-full
+          bg-white/25 backdrop-blur-lg border border-white/30 shadow-xl rounded-3xl py-5 px-6 flex flex-col gap-4 md:hidden" // ✅ Same glass style as desktop
         >
           {navItems.map((item) => (
             <NavLink
@@ -95,10 +96,10 @@ const Navbar = () => {
               to={item.path}
               onClick={() => setIsOpen(false)}
               className={({ isActive }) =>
-                `text-base font-medium ${
+                `text-base font-medium transition-colors ${
                   isActive
                     ? "text-purple-500"
-                    : "text-gray-200 hover:text-purple-400"
+                    : "text-gray-800 hover:text-purple-400"
                 }`
               }
             >

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaInstagram, FaLinkedinIn, FaTimes } from "react-icons/fa";
 import { RiYoutubeFill } from "react-icons/ri";
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // টোস্টের CSS
+
 const Contact = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -9,15 +13,87 @@ const Contact = () => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState('');
   const [isAnimated, setIsAnimated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // নতুন লোডিং স্টেট
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
   useEffect(() => {
-    // Trigger animation on mount
     setIsAnimated(true);
   }, []);
+
+  const handleSubmit = async () => {
+    // ফর্ম ভ্যালিডেশন
+    if (!firstName || !lastName || !email || !subject || !message) {
+      toast.error('Please fill in all required fields!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+
+    setIsLoading(true); // লোডিং শুরু
+
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('email', email);
+    formData.append('subject', subject);
+    if (file) formData.append('file', file); // ফাইল থাকলে অ্যাড করুন
+    formData.append('message', message);
+
+    try {
+      const response = await axios.post('http://localhost:5004/api/contact', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      setFile(null); // সফল হলে ফাইল স্টেট null করা
+      toast.success(
+        <div>
+          <strong>Success!</strong><br />
+          Your form has been submitted successfully!<br />
+          {response.data.videoUrl && (
+            <span>Video link: <a href={response.data.videoUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">View Video</a></span>
+          )}
+        </div>,
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }
+      );
+      // ফর্ম রিসেট
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+    } catch (error) {
+      toast.error('Error submitting form. Please try again!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } finally {
+      setIsLoading(false); // লোডিং শেষ
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 py-8">
@@ -77,9 +153,10 @@ const Contact = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Choose File</label>
+              <label className="block text-sm font-medium text-gray-700">Choose Video File</label>
               <input
                 type="file"
+                accept="video/*"
                 onChange={handleFileChange}
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md"
               />
@@ -95,10 +172,11 @@ const Contact = () => {
               />
             </div>
             <button
-              className="w-full cursor-pointer bg-purple-500 text-white p-2 rounded-md hover:bg-purple-600"
-              onClick={() => alert('Form submitted!')}
+              className={`w-full cursor-pointer bg-purple-500 text-white p-2 rounded-md hover:bg-purple-600 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={handleSubmit}
+              disabled={isLoading} // লোডিংয়ের সময় বোতাম ডিসেবল
             >
-              Send
+              {isLoading ? 'Loading...' : 'Send'}
             </button>
           </div>
         </div>
@@ -121,23 +199,23 @@ const Contact = () => {
             We are a small team and encourage our staff to have time off which is why we expect slightly slower response times but on urgent issues, we get back ASAP.
           </p>
           <h3 className="text-xl font-semibold text-purple-500 mb-4">Find Us Online</h3>
-          {/* Social Media */}
-        <div className="flex items-center gap-4">
-          <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
-            <FaFacebookF />
+          <div className="flex items-center gap-4">
+            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
+              <FaFacebookF />
+            </div>
+            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
+              <FaInstagram />
+            </div>
+            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
+              <FaLinkedinIn />
+            </div>
+            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
+              <RiYoutubeFill />
+            </div>
           </div>
-          <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
-            <FaInstagram />
-          </div>
-          <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
-            <FaLinkedinIn />
-          </div>
-          <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
-            <RiYoutubeFill />
-          </div>
-        </div>
         </div>
       </div>
+      <ToastContainer /> {/* টোস্ট কন্টেইনার যোগ করুন */}
     </div>
   );
 };
