@@ -24,13 +24,13 @@ const Navbar = () => {
       animate={isVisible ? { y: 0, opacity: 1 } : {}}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed max-w-7xl mx-auto top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-[90%] lg:w-[80%]
-      text-white rounded-full shadow-lg px-6 py-3 flex justify-between items-center
+       rounded-full shadow-lg px-6 py-3 flex justify-between items-center
       bg-white/25 backdrop-blur-lg border border-white/30" // ✅ Unified glass effect
     >
       {/* Logo */}
       <Link to={"/"}>
         <h1 className="text-xl cursor-pointer md:text-2xl font-bold tracking-tight text-black">
-          Fahim<span className="text-purple-500">Edits</span>
+          Fahim<span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent">Edits</span>
         </h1>
       </Link>
 
@@ -43,7 +43,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `text-sm font-medium transition-colors ${
                 isActive
-                  ? "text-purple-500"
+                  ? "bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent"
                   : "text-gray-700 hover:text-purple-400"
               }`
             }
@@ -87,8 +87,7 @@ const Navbar = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="absolute top-[70px] left-0 w-full
-          bg-white/25 backdrop-blur-lg border border-white/30 shadow-xl rounded-3xl py-5 px-6 flex flex-col gap-4 md:hidden" // ✅ Same glass style as desktop
+          className="absolute top-[70px] left-0 w-full bg-white/30 backdrop-blur-3xl shadow-xl rounded-3xl py-5 px-6 flex flex-col gap-4 md:hidden" // ✅ Same glass style as desktop
         >
           {navItems.map((item) => (
             <NavLink
@@ -98,8 +97,8 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `text-base font-medium transition-colors ${
                   isActive
-                    ? "text-purple-500"
-                    : "text-gray-800 hover:text-purple-400"
+                    ? "bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent"
+                    : "text-gray-800 hover:bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text"
                 }`
               }
             >
@@ -116,11 +115,11 @@ const Navbar = () => {
                   section.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="bg-white hover:bg-purple-500 hover:text-white text-black text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition"
+              className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF]  text-white  text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition"
             >
               START A PROJECT
             </button>
-            <div className="bg-white hover:bg-purple-500 hover:text-white text-black p-2 rounded-full cursor-pointer transition">
+            <div className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white p-2 rounded-full cursor-pointer transition">
               <FiArrowRight />
             </div>
           </div>
