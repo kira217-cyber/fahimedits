@@ -61,11 +61,11 @@ const Navbar = () => {
                 section.scrollIntoView({ behavior: "smooth" });
               }
             }}
-            className="bg-white cursor-pointer text-black text-xs font-semibold px-4 py-2 rounded-full border border-black/10 hover:bg-purple-500 hover:text-white transition"
+            className="bg-white cursor-pointer text-black text-xs font-semibold px-4 py-2 rounded-full border border-black/10 hover:bg-gradient-to-r hover:from-[#7683FF] hover:to-[#C77DFF] transition hover:text-white"
           >
             START YOUR PROJECT
           </button>
-          <div className="bg-white border border-black/10 cursor-pointer hover:bg-purple-500 hover:text-white text-black p-2 rounded-full transition">
+          <div className="bg-white border border-black/10 cursor-pointer hover:bg-gradient-to-r hover:from-[#7683FF] hover:to-[#C77DFF] transition hover:text-white p-2 rounded-full transition">
             <FiArrowRight />
           </div>
         </div>
@@ -87,7 +87,7 @@ const Navbar = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="absolute top-[70px] left-0 w-full bg-white/30 backdrop-blur-3xl shadow-xl rounded-3xl py-5 px-6 flex flex-col gap-4 md:hidden" // ✅ Same glass style as desktop
+          className="absolute top-[70px] left-0 w-full bg-white/90 backdrop-blur-3xl shadow-xl rounded-3xl py-5 px-6 flex flex-col gap-4 md:hidden" // ✅ Same glass style as desktop
         >
           {navItems.map((item) => (
             <NavLink
