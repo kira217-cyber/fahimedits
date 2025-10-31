@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FiSend, FiUploadCloud } from "react-icons/fi";
 import video from "../../assets/video.jpeg";
-import { FaHornbill } from "react-icons/fa";
+import { FaCircle, FaHornbill } from "react-icons/fa";
 import { Link } from "react-router";
 
 const ShotSend = () => { 
@@ -79,7 +79,14 @@ const openWhatsApp = () => {
               </button>
             </Link>
             <button onClick={openWhatsApp} className="flex cursor-pointer items-center gap-2 border border-purple-600 bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight px-6 py-3 rounded-lg font-semibold transition-all">
-              <FaHornbill className="text-xl bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-transparent text-white rounded-full p-1" />
+              {/* Online Dot + Glow Effect */}
+                    <span className="flex items-center justify-center">
+                      {/* Glow background */}
+                      <span className="absolute w-6 h-6 bg-green-500/40 rounded-full blur-lg drop-glow"></span>
+              
+                      {/* Main green dot */}
+                      <FaCircle size={14} className="text-green-500 relative z-10" />
+                    </span>
               Get Instant Reply
             </button>
           </div>

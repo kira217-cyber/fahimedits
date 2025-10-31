@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import FahimVideo from "../../assets/fahimvideo.mp4"; // তোমার নিজের ভিডিও path
-import { FaHornbill } from "react-icons/fa";
-
+import { FaCircle, FaHornbill } from "react-icons/fa";
+import '../../index.css'
 const Hero = () => {
   const phoneNumber = "8801319242789"; // 👉 তোমার WhatsApp নাম্বার এখানে দাও (country code সহ)
 
@@ -56,10 +56,17 @@ const openWhatsApp = () => {
               }}
               className="flex cursor-pointer bg-gradient-to-r text-white from-[#7683FF] to-[#C77DFF] items-center gap-1.5 md:gap-2 border border-gray-200 px-4 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-full font-semibold transition shadow-md"
             >
-              Instant Reply{" "}
-              <span className="text-base md:text-xl">
-                <FaHornbill />
-              </span>
+
+   
+      {/* Online Dot + Glow Effect */}
+      <span className="flex items-center justify-center">
+        {/* Glow background */}
+        <span className="absolute w-6 h-6 bg-green-500/40 rounded-full blur-lg drop-glow"></span>
+
+        {/* Main green dot */}
+        <FaCircle size={14} className="text-green-500 relative z-10" />
+      </span>
+       Instant Reply{" "}
             </motion.button>
           </div>
         </div>
