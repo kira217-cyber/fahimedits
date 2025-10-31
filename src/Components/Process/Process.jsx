@@ -14,7 +14,7 @@ const Process = () => {
   return (
     <section
       id="process"
-      className="px-6 py-16 md:py-32 md:px-16 lg:px-24 bg-gradient-to-br from-white to-purple-50 overflow-hidden"
+      className="px-6 py-16 md:py-32 md:px-16 lg:px-24 bg-white overflow-hidden"
     >
     <div className="max-w-7xl mx-auto">
         {/* Section Title */}
@@ -26,11 +26,11 @@ const Process = () => {
         transition={{ duration: 0.8 }}
         className="text-center mb-12 "
       >
-        <span className="text-sm bg-purple-100 text-purple-600 px-4 py-1 rounded-full font-medium">
+        <span className="text-sm bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
           Simple Process
         </span>
         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug mt-3">
-          Simple Process for <span className="text-purple-500">Your Video</span>
+          Simple Process for <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">Your Video</span>
         </h2>
         <p className="max-w-2xl mx-auto text-gray-600 mt-3">
           From idea to stunning visuals — our process makes your video creation
@@ -49,13 +49,13 @@ const Process = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex flex-col justify-center md:pr-8 xl:pr-0 lg:max-w-lg"
         >
-          <div className="flex items-center text-purple-500 justify-center w-16 h-16 mb-4 rounded-full bg-purple-100 shadow-inner">
+          <div className="flex items-center bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white justify-center w-16 h-16 mb-4 rounded-full shadow-inner">
             <FaVideo size={24}/> 
           </div>
           <div className="max-w-xl mb-6">
             <h3 className="max-w-lg mb-4 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Let’s Create Something{" "}
-              <span className="text-purple-500">Incredible Together</span>
+              <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">Incredible Together</span>
             </h3>
             <p className="text-base text-gray-700 md:text-lg">
               Our process is simple — share your vision, and we handle the rest.
@@ -64,7 +64,7 @@ const Process = () => {
             </p>
           </div>
           <div>
-            <button className="px-6 py-3 cursor-pointer bg-purple-600 text-white rounded-full shadow-md hover:bg-purple-700 transition-all duration-300">
+            <button className="px-6 py-3 cursor-pointer bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white rounded-full shadow-md transition-all duration-300">
               <Link to={'/process'}>Learn More</Link>
             </button>
           </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import Hero from "../Components/Hero/Hero";
-// import OurWork from "../Components/OurWork/OurWork";
+import OurWork from "../Components/OurWork/OurWork";
 import ProjectIdea from "../Components/ProjectIdea/ProjectIdea";
 import OurTeam from "../Components/OurTeam/OurTeam";
 import Process from "../Components/Process/Process";
@@ -14,7 +14,7 @@ const Home = () => {
       <Hero></Hero>     
       <ProjectIdea></ProjectIdea>
       <Upwork></Upwork>
-      {/* <OurWork></OurWork> */}
+      <OurWork></OurWork>
        <Process></Process>
       {/* <WeEdit></WeEdit> */}
       {/* <OurTeam></OurTeam> */}

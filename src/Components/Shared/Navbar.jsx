@@ -13,7 +13,6 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Our Work", path: "/our-work" },
     { name: "Process", path: "/process" },
     { name: "Contact", path: "/contact" },
   ];
@@ -30,7 +29,10 @@ const Navbar = () => {
       {/* Logo */}
       <Link to={"/"}>
         <h1 className="text-xl cursor-pointer md:text-2xl font-bold tracking-tight text-black">
-          Fahim<span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent">Edits</span>
+          Fahim
+          <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent">
+            Edits
+          </span>
         </h1>
       </Link>
 
@@ -41,7 +43,7 @@ const Navbar = () => {
             key={item.name}
             to={item.path}
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors ${
+              `text-md font-medium transition-colors ${
                 isActive
                   ? "bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent"
                   : "text-gray-700 hover:text-purple-400"
@@ -65,9 +67,11 @@ const Navbar = () => {
           >
             START YOUR PROJECT
           </button>
-          <div className="bg-white border border-black/10 cursor-pointer hover:bg-gradient-to-r hover:from-[#7683FF] hover:to-[#C77DFF] transition hover:text-white p-2 rounded-full transition">
-            <FiArrowRight />
-          </div>
+          <Link to={"/contact"}>
+            <div className="bg-white border border-black/10 cursor-pointer hover:bg-gradient-to-r hover:from-[#7683FF] hover:to-[#C77DFF] transition hover:text-white p-2 rounded-full transition">
+              <FiArrowRight />
+            </div>
+          </Link>
         </div>
       </div>
 

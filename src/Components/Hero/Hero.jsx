@@ -4,6 +4,13 @@ import FahimVideo from "../../assets/fahimvideo.mp4"; // তোমার নি�
 import { FaHornbill } from "react-icons/fa";
 
 const Hero = () => {
+  const phoneNumber = "8801319242789"; // 👉 তোমার WhatsApp নাম্বার এখানে দাও (country code সহ)
+
+
+const openWhatsApp = () => {
+    const whatsappUrl = `https://wa.me/${phoneNumber}`;
+    window.open(whatsappUrl, "_blank");
+  };
   return (
     <motion.section
       initial={{ opacity: 0, y: 60 }}
@@ -40,12 +47,7 @@ const Hero = () => {
 
             {/* Instant Reply Button (Bouncing Animation) */}
             <motion.button
-              onClick={() => {
-                const section = document.getElementById("shot-send");
-                if (section) {
-                  section.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
+              onClick={openWhatsApp}
               animate={{ y: [0, -8, 0] }}
               transition={{
                 repeat: Infinity,

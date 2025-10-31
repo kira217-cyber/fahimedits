@@ -4,8 +4,9 @@ import RootLayout from "../RootLayout/RootLayout";
 import Home from "../Pages/Home";
 import Contact from "../Pages/Contact";
 import Process from "../Pages/Process";
-import About from "../Pages/About";
-import Portfolio from "../Pages/Portfolio";
+import TermsAndConditions from "../Pages/TermsAndConditions";
+import RefoundPolicy from "../Pages/RefoundPolicy";
+import PrivacyPolicy from "../Pages/PrivacyPolicy";
 
 export const routes = createBrowserRouter([
   {
@@ -25,12 +26,16 @@ export const routes = createBrowserRouter([
         element: <Process></Process>,
       },
       {
-        path: "about",
-        element: <About></About>,
+        path: "terms&conditions",
+        element: <TermsAndConditions></TermsAndConditions>,
       },
       {
-        path: "our-work",
-        element: <Portfolio></Portfolio>,
+        path: "/refound-policy",
+        element: <RefoundPolicy></RefoundPolicy>,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy></PrivacyPolicy>,
       },
     ],
   },

@@ -1,11 +1,20 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FiSend, FiUploadCloud } from "react-icons/fi";
-import video from "../../assets/video.png"
+import video from "../../assets/video.jpeg";
+import { FaHornbill } from "react-icons/fa";
+import { Link } from "react-router";
 
-const ShotSend = () => {
+const ShotSend = () => { 
+  const phoneNumber = "8801319242789"; // 👉 তোমার WhatsApp নাম্বার এখানে দাও (country code সহ)
+
+
+const openWhatsApp = () => {
+    const whatsappUrl = `https://wa.me/${phoneNumber}`;
+    window.open(whatsappUrl, "_blank");
+  };
   return (
-    <div className="bg-gradient-to-b from-purple-50 to-white py-20 px-6 md:px-10 lg:px-20">
+    <div className="bg-white py-20 px-6 md:px-10 lg:px-20">
       {/* 🔥 Animated Section Header */}
       <motion.div
         className="text-center max-w-3xl mx-auto mb-12"
@@ -15,13 +24,16 @@ const ShotSend = () => {
         viewport={{ once: true }}
       >
         <div className="flex justify-center mb-5">
-          <div className="w-14 h-14 flex items-center justify-center bg-purple-100 rounded-full">
-            <FiSend className="text-purple-600 text-3xl" />
+          <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white  rounded-full">
+            <FiSend className="text-white text-3xl" />
           </div>
         </div>
 
         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug">
-          <span className="text-purple-600">Shot & Send</span> Your Moments
+          <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+            Shot & Send
+          </span>{" "}
+          Your Moments
         </h2>
 
         <p className="text-gray-600 mt-4 text-lg max-w-2xl mx-auto">
@@ -60,18 +72,20 @@ const ShotSend = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 mt-6">
-            <button className="flex cursor-pointer items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-purple-700 transition-all">
-              <FiUploadCloud className="text-xl" />
-              Share Idea
-            </button>
-            <button className="flex cursor-pointer items-center gap-2 border border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-all">
-              <FiSend className="text-xl" />
-              Get Instant Quote
+            <Link to={"/contact"}>
+              <button className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white px-6 py-3 rounded-lg font-semibold shadow-md transition-all">
+                <FiUploadCloud className="text-xl" />
+                Share Idea
+              </button>
+            </Link>
+            <button onClick={openWhatsApp} className="flex cursor-pointer items-center gap-2 border border-purple-600 bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight px-6 py-3 rounded-lg font-semibold transition-all">
+              <FaHornbill className="text-xl bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-transparent text-white rounded-full p-1" />
+              Get Instant Reply
             </button>
           </div>
 
           <p className="text-sm text-gray-500 mt-4">
-         Supported formats: MP4, MOV, AVI — up to 2GB per file.
+            Supported formats: MP4, MOV, AVI — up to 2GB per file.
           </p>
         </div>
       </motion.div>
