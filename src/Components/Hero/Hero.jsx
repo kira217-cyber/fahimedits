@@ -1,7 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import FahimVideo from "../../assets/fahimvideo.mp4"; // তোমার নিজের ভিডিও path
-import { FaCircle, FaHornbill } from "react-icons/fa";
+import { FaCircle } from "react-icons/fa";
+import { GoArrowRight } from "react-icons/go";
 import '../../index.css'
 const Hero = () => {
   const phoneNumber = "8801319242789"; // 👉 তোমার WhatsApp নাম্বার এখানে দাও (country code সহ)
@@ -42,7 +43,9 @@ const openWhatsApp = () => {
               }}
               className="flex cursor-pointer items-center gap-1 md:gap-2 border border-gray-200 px-2 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-full font-semibold hover:bg-gradient-to-r hover:from-[#7683FF] hover:to-[#C77DFF] transition hover:text-white"
             >
-              Start Your Project <span className="text-base md:text-xl">→</span>
+              Start Your Project <span className="text-base md:text-xl"><GoArrowRight />
+
+</span>
             </button>
 
             {/* Instant Reply Button (Bouncing Animation) */}
