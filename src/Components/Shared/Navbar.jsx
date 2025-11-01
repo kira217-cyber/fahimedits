@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router"; // ✅ corrected import
 import { motion } from "framer-motion";
 import { FiArrowRight, FiMenu, FiX } from "react-icons/fi";
+import { FaCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ const Navbar = () => {
       <Link to={"/"}>
         <h1 className="text-xl cursor-pointer md:text-2xl font-bold tracking-tight text-black">
           Fahim
-          <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent">
             Edits
           </span>
         </h1>
@@ -45,8 +46,8 @@ const Navbar = () => {
             className={({ isActive }) =>
               `text-md font-medium transition-colors ${
                 isActive
-                  ? "bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent"
-                  : "text-gray-700 hover:text-purple-400"
+                  ? "bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent"
+                  : "hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] bg-clip-text hover:text-transparent"
               }`
             }
           >
@@ -56,19 +57,21 @@ const Navbar = () => {
 
         {/* Start a Project Button */}
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              const section = document.getElementById("shot-send");
-              if (section) {
-                section.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-            className="bg-white cursor-pointer text-black text-xs font-semibold px-4 py-2 rounded-full border border-black/10 hover:bg-gradient-to-r hover:from-[#7683FF] hover:to-[#C77DFF] transition hover:text-white"
-          >
-            START YOUR PROJECT
-          </button>
           <Link to={"/contact"}>
-            <div className="bg-white border border-black/10 cursor-pointer hover:bg-gradient-to-r hover:from-[#7683FF] hover:to-[#C77DFF] transition hover:text-white p-2 rounded-full transition">
+          <button
+            className="bg-white flex items-center gap-2 cursor-pointer text-black text-sm font-semibold px-4 py-2 rounded-full border border-black/10 hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white"
+          >
+             {/* Online Dot + Glow Effect */}
+              <span className="flex items-center justify-center">
+                {/* Glow background */}
+                <span className="absolute w-6 h-6 bg-green-500/60 rounded-full blur-lg drop-glow"></span>
+
+                {/* Main green dot */}
+                <FaCircle size={14} className="text-green-500 relative z-10" />
+              </span> Share Idea
+          </button></Link>
+          <Link to={"/contact"}>
+            <div className="bg-white border border-black/10 cursor-pointer hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white p-2 rounded-full">
               <FiArrowRight />
             </div>
           </Link>
@@ -101,8 +104,8 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `text-base font-medium transition-colors ${
                   isActive
-                    ? "bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent"
-                    : "text-gray-800 hover:bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text"
+                    ? "bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent"
+                    : "text-gray-800 hover:bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text"
                 }`
               }
             >
@@ -112,20 +115,28 @@ const Navbar = () => {
 
           {/* Mobile Button */}
           <div className="flex items-center gap-2 mt-4">
-            <button
-              onClick={() => {
-                const section = document.getElementById("shot-send");
-                if (section) {
-                  section.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF]  text-white  text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition"
-            >
-              START A PROJECT
-            </button>
-            <div className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white p-2 rounded-full cursor-pointer transition">
-              <FiArrowRight />
-            </div>
+            <Link to={"/contact"}>
+              <button className="bg-gradient-to-r flex items-center gap-2 from-[#4E8EFF] to-[#A072FF]  text-white  text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition">
+                {" "}
+                {/* Online Dot + Glow Effect */}
+                <span className="flex items-center justify-center">
+                  {/* Glow background */}
+                  <span className="absolute w-6 h-6 bg-green-500/60 rounded-full blur-lg drop-glow"></span>
+
+                  {/* Main green dot */}
+                  <FaCircle
+                    size={14}
+                    className="text-green-500 relative z-10"
+                  />
+                </span>
+                Share Idea
+              </button>
+            </Link>
+            <Link to={"/contact"}>
+              <div className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white p-2 rounded-full cursor-pointer transition">
+                <FiArrowRight />
+              </div>{" "}
+            </Link>
           </div>
         </motion.div>
       )}

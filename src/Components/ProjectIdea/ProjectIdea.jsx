@@ -23,7 +23,7 @@ const ProjectIdea = () => {
   }, [rawFootage, cameraCount, editingPreference, finalOutput]);
 
   return (
-    <div id="shot-send" className="min-h-screen bg-white flex flex-col items-center px-6 md:px-16 lg:px-24 py-16 md:py-32">
+    <div id="shot-send" className="min-h-screen bg-white flex flex-col items-center md:px-16 lg:px-24 py-16 md:py-32">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -31,14 +31,14 @@ const ProjectIdea = () => {
         transition={{ duration: 1 }}
         className="text-center mb-12 max-w-3xl"
       >
-        <span className="text-sm bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
+        <span className="text-sm bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
           Start Your Project
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-4 leading-tight">
-          Our Edits <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">Your Brands</span>
+          No Hidden <span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">Fees.</span>
         </h1>
         <p className="mt-4 text-gray-700 md:text-lg">
-          We craft stunning videos that inspire, engage, and tell powerful stories. Each project is built with precision and creativity.
+          Just Clear, Upfront Pricing.
         </p>
       </motion.div>
 
@@ -49,12 +49,10 @@ const ProjectIdea = () => {
         transition={{ duration: 1, delay: 0.2 }}
         className="bg-white rounded-3xl shadow-lg w-full max-w-3xl p-8"
       >
-        
-
         <div className="space-y-6">
           {/* Video Type */}
           <div>
-            <label className="block text-sm md:text-lg font-bold  bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+            <label className="block text-sm md:text-lg font-bold  bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
               Video Type
             </label>
             <select
@@ -77,7 +75,7 @@ const ProjectIdea = () => {
 
           {/* Raw Footage */}
           <div>
-            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
               Amount of Raw Footage
             </label>
             <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -99,7 +97,7 @@ const ProjectIdea = () => {
 
           {/* Camera Count */}
           <div>
-            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
               Number of Cameras
             </label>
             <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -121,7 +119,7 @@ const ProjectIdea = () => {
 
           {/* Editing Preference */}
           <div>
-            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
               Editing Preference
             </label>
             <select
@@ -137,7 +135,7 @@ const ProjectIdea = () => {
 
           {/* Final Output */}
           <div>
-            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
               Final Output (Minutes)
             </label>
             <input
@@ -146,14 +144,14 @@ const ProjectIdea = () => {
               max="120"
               value={finalOutput}
               onChange={(e) => setFinalOutput(e.target.value)}
-              className="w-full mt-2 accent-purple-500 text-lg font-bold"
+              className="w-full mt-2 accent-blue-500 text-lg font-bold"
             />
-            <div className="mt-1 text-lg font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">{finalOutput} min</div>
+            <div className="mt-1 text-lg font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">{finalOutput} min</div>
           </div>
 
           {/* Type */}
           <div>
-            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
               Type
             </label>
             <select
@@ -168,10 +166,10 @@ const ProjectIdea = () => {
 
           {/* Total Cost */}
           <div>
-            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+            <label className="block text-sm md:text-lg font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
               Total USD
             </label>
-            <div className="mt-2 border border-gray-200 font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight p-3 rounded-md text-center text-lg">
+            <div className="mt-2 border border-gray-200 font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight p-3 rounded-md text-center text-lg">
               ${totalCost.toFixed(2)}
             </div>
           </div>

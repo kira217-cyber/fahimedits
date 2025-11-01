@@ -14,7 +14,7 @@ const Process = () => {
   return (
     <section
       id="process"
-      className="px-6 py-16 md:py-32 md:px-16 lg:px-24 bg-white overflow-hidden"
+      className="py-16 md:py-32 md:px-16 lg:px-24 bg-white overflow-hidden"
     >
     <div className="max-w-7xl mx-auto">
         {/* Section Title */}
@@ -26,14 +26,14 @@ const Process = () => {
         transition={{ duration: 0.8 }}
         className="text-center mb-12 "
       >
-        <span className="text-sm bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
+        <span className="text-sm bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
           Simple Process
         </span>
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug mt-3">
-          Simple Process for <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">Your Video</span>
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug mt-4">
+          Shoot & Send,<span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight"> That’s It</span>
         </h2>
         <p className="max-w-2xl mx-auto text-gray-600 mt-3">
-          From idea to stunning visuals — our process makes your video creation
+          Our process makes your video creation
           smooth, creative, and effortless.
         </p>
       </motion.div>
@@ -49,22 +49,20 @@ const Process = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex flex-col justify-center md:pr-8 xl:pr-0 lg:max-w-lg"
         >
-          <div className="flex items-center bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white justify-center w-16 h-16 mb-4 rounded-full shadow-inner">
+          <div className="flex items-center bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white justify-center w-16 h-16 mb-6 rounded-full shadow-inner">
             <FaVideo size={24}/> 
           </div>
-          <div className="max-w-xl mb-6">
-            <h3 className="max-w-lg mb-4 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Let’s Create Something{" "}
-              <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">Incredible Together</span>
+          <div className="max-w-xl mb-6 space-y-6">
+            <h3 className="max-w-lg font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Let’s Create Something.{" "}
+              <span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">Send brief & footage.</span>
             </h3>
             <p className="text-base text-gray-700 md:text-lg">
-              Our process is simple — share your vision, and we handle the rest.
-              From concept planning to professional editing, we bring your ideas
-              to life with creativity and care.
+              Share your vision — we’ll handle the rest, turning your ideas into stunning edits.
             </p>
           </div>
           <div>
-            <button className="px-6 py-3 cursor-pointer bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white rounded-full shadow-md transition-all duration-300">
+            <button className="px-6 py-3 cursor-pointer bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white rounded-full shadow-md transition-all duration-300">
               <Link to={'/process'}>Learn More</Link>
             </button>
           </div>

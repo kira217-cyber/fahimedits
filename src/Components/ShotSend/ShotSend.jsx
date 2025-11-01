@@ -14,7 +14,7 @@ const openWhatsApp = () => {
     window.open(whatsappUrl, "_blank");
   };
   return (
-    <div className="bg-white py-20 px-6 md:px-10 lg:px-20">
+    <div className="bg-white py-20 md:px-10 lg:px-20">
       {/* 🔥 Animated Section Header */}
       <motion.div
         className="text-center max-w-3xl mx-auto mb-12"
@@ -24,13 +24,13 @@ const openWhatsApp = () => {
         viewport={{ once: true }}
       >
         <div className="flex justify-center mb-5">
-          <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white  rounded-full">
+          <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white  rounded-full">
             <FiSend className="text-white text-3xl" />
           </div>
         </div>
 
         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug">
-          <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+          <span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
             Shot & Send
           </span>{" "}
           Your Moments
@@ -73,16 +73,16 @@ const openWhatsApp = () => {
 
           <div className="flex flex-wrap gap-4 mt-6">
             <Link to={"/contact"}>
-              <button className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-white px-6 py-3 rounded-lg font-semibold shadow-md transition-all">
-                <FiUploadCloud className="text-xl" />
+              <button className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-transparent bg-clip-text px-6 py-3 rounded-lg font-semibold shadow-md transition-all">
+                <span className="text-blue-400"><FiUploadCloud className="text-xl" /></span>
                 Share Idea
               </button>
             </Link>
-            <button onClick={openWhatsApp} className="flex cursor-pointer items-center gap-2 border border-purple-600 bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight px-6 py-3 rounded-lg font-semibold transition-all">
+            <button onClick={openWhatsApp} className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white leading-tight px-6 py-3 rounded-lg font-semibold transition-all">
               {/* Online Dot + Glow Effect */}
                     <span className="flex items-center justify-center">
                       {/* Glow background */}
-                      <span className="absolute w-6 h-6 bg-green-500/40 rounded-full blur-lg drop-glow"></span>
+                      <span className="absolute w-6 h-6 bg-green-500/60 rounded-full blur-lg drop-glow"></span>
               
                       {/* Main green dot */}
                       <FaCircle size={14} className="text-green-500 relative z-10" />

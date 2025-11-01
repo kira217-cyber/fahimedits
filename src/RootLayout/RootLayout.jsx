@@ -11,7 +11,7 @@ const RootLayout = () => {
       <ScrollToTop />
       <WhatsAppFloating></WhatsAppFloating>
       <Navbar></Navbar>
-      <div className="mt-24">
+      <div className="mt-24 px-4">
         <Outlet></Outlet>
       </div>
       <Footer></Footer>

@@ -4,7 +4,7 @@ import { FiFileText, FiCheckCircle, FiShield, FiClock } from "react-icons/fi";
 
 const TermsAndConditions = () => {
   return (
-    <div className="bg-white max-w-7xl mx-auto min-h-screen py-12 px-4 md:px-10 lg:px-20">
+    <div className="bg-white max-w-7xl mx-auto min-h-screen py-12 md:px-10 lg:px-20">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
@@ -12,7 +12,7 @@ const TermsAndConditions = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-10"
       >
-        <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent">
           Terms & Conditions
         </h1>
         <p className="text-gray-500 font-bold mt-3 text-sm md:text-base">
@@ -28,19 +28,19 @@ const TermsAndConditions = () => {
         className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center mb-12"
       >
         <div className="flex flex-col items-center">
-          <FiFileText className="text-4xl text-[#7683FF]" />
+          <FiFileText className="text-4xl text-[#4E8EFF]" />
           <p className="mt-2 text-sm font-medium text-gray-600">Agreements</p>
         </div>
         <div className="flex flex-col items-center">
-          <FiCheckCircle className="text-4xl text-[#C77DFF]" />
+          <FiCheckCircle className="text-4xl text-[#A072FF]" />
           <p className="mt-2 text-sm font-medium text-gray-600">Revisions</p>
         </div>
         <div className="flex flex-col items-center">
-          <FiShield className="text-4xl text-[#7683FF]" />
+          <FiShield className="text-4xl text-[#4E8EFF] " />
           <p className="mt-2 text-sm font-medium text-gray-600">Security</p>
         </div>
         <div className="flex flex-col items-center">
-          <FiClock className="text-4xl text-[#C77DFF]" />
+          <FiClock className="text-4xl text-[#A072FF]" />
           <p className="mt-2 text-sm font-medium text-gray-600">Timelines</p>
         </div>
       </motion.div>

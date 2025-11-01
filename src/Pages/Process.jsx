@@ -34,7 +34,7 @@ const features = [
 
 const Process = () => {
   return (
-    <section className="bg-white text-black py-20 px-6 sm:px-10 md:px-16 lg:px-24 overflow-hidden">
+    <section className="bg-white text-black py-10 md:px-16 lg:px-24 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-24">
         {features.map((feature, index) => (
           <motion.div
@@ -64,7 +64,7 @@ const Process = () => {
 
             {/* Content Section */}
             <div className="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold  bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold  bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
                 {feature.title}
               </h2>
 
@@ -73,11 +73,11 @@ const Process = () => {
                   <motion.div
                     key={i}
                     whileHover={{ scale: 1.02 }}
-                    className="flex items-start bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight border border-gray-200 sm:items-center gap-4  p-4 rounded-xl transition-all duration-300"
+                    className="flex items-start bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 sm:items-center gap-4  p-4 rounded-xl transition-all duration-300"
                   >
-                    <div className="text-[#7683FF] text-3xl">{item.icon}</div>
+                    <div className="text-[#4E8EFF] text-3xl">{item.icon}</div>
                     <div className="text-left">
-                      <h4 className="font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight text-lg mb-1">{item.title}</h4>
+                      <h4 className="font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight text-lg mb-1">{item.title}</h4>
                       <p className="text-sm text-gray-700">{item.desc}</p>
                     </div>
                   </motion.div>

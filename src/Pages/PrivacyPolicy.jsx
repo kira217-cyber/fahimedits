@@ -12,7 +12,7 @@ const PrivacyPolicy = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-12"
       >
-        <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent">
           Privacy Policy
         </h1>
         <p className="text-gray-500 font-bold mt-3 text-sm md:text-base">
@@ -28,21 +28,21 @@ const PrivacyPolicy = () => {
         className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center mb-12"
       >
         <div className="flex flex-col items-center">
-          <FaUserShield className="text-4xl text-[#7683FF]" />
+          <FaUserShield className="text-4xl text-[#4E8EFF]" />
           <p className="mt-2 text-sm font-medium text-gray-600">User Privacy</p>
         </div>
         <div className="flex flex-col items-center">
-          <FaLock className="text-4xl text-[#C77DFF]" />
+          <FaLock className="text-4xl text-[#A072FF]" />
           <p className="mt-2 text-sm font-medium text-gray-600">
             Data Security
           </p>
         </div>
         <div className="flex flex-col items-center">
-          <FaFileAlt className="text-4xl text-[#7683FF]" />
+          <FaFileAlt className="text-4xl text-[#4E8EFF] " />
           <p className="mt-2 text-sm font-medium text-gray-600">Transparency</p>
         </div>
         <div className="flex flex-col items-center">
-          <FaGlobe className="text-4xl text-[#C77DFF]" />
+          <FaGlobe className="text-4xl text-[#A072FF]" />
           <p className="mt-2 text-sm font-medium text-gray-600">
             Global Policy
           </p>

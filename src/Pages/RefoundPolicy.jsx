@@ -12,7 +12,7 @@ const RefoundPolicy = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-10"
       >
-        <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent">
           Refund Policy
         </h1>
         <p className="text-gray-500 mt-3 font-bold text-sm md:text-base">
@@ -28,19 +28,19 @@ const RefoundPolicy = () => {
         className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center mb-12"
       >
         <div className="flex flex-col items-center">
-          <FiRefreshCcw className="text-4xl text-[#7683FF]" />
+          <FiRefreshCcw className="text-4xl text-[#4E8EFF]" />
           <p className="mt-2 text-sm font-medium text-gray-600">Rework First</p>
         </div>
         <div className="flex flex-col items-center">
-          <FiDollarSign className="text-4xl text-[#C77DFF]" />
+          <FiDollarSign className="text-4xl text-[#A072FF]" />
           <p className="mt-2 text-sm font-medium text-gray-600">Partial Refund</p>
         </div>
         <div className="flex flex-col items-center">
-          <FiClock className="text-4xl text-[#7683FF]" />
+          <FiClock className="text-4xl text-[#4E8EFF] " />
           <p className="mt-2 text-sm font-medium text-gray-600">Timeline Based</p>
         </div>
         <div className="flex flex-col items-center">
-          <FiMail className="text-4xl text-[#C77DFF]" />
+          <FiMail className="text-4xl text-[#A072FF]" />
           <p className="mt-2 text-sm font-medium text-gray-600">Contact Us</p>
         </div>
       </motion.div>

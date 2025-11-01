@@ -19,10 +19,10 @@ const openWhatsApp = () => {
       transition={{ duration: 1 }}
       className="bg-white"
     >
-      <div className="flex flex-col-reverse lg:flex-row max-w-7xl mx-auto items-center justify-between px-2 md:px-16 lg:px-12 py-6 md:py-32">
+      <div className="flex flex-col-reverse lg:flex-row max-w-7xl mx-auto items-center justify-between md:px-16 lg:px-12 py-6 md:py-32">
         {/* ---------- Left Section ---------- */}
-        <div className="flex-1 space-y-6 text-center lg:text-left">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">
+        <div className="flex-1 space-y-10 text-center lg:text-left">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
             Your On-Demand <br /> Video Editing Partner
           </h1>
 
@@ -41,9 +41,9 @@ const openWhatsApp = () => {
                   section.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="flex cursor-pointer items-center gap-1 md:gap-2 border border-gray-200 px-2 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-full font-semibold hover:bg-gradient-to-r hover:from-[#7683FF] hover:to-[#C77DFF] transition hover:text-white"
+              className="flex cursor-pointer items-center gap-1 md:gap-2 border border-gray-200 px-2 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-full font-semibold hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white"
             >
-              Start Your Project <span className="text-base md:text-xl"><GoArrowRight />
+              Share Idea <span className="text-base md:text-xl"><GoArrowRight />
 
 </span>
             </button>
@@ -51,20 +51,20 @@ const openWhatsApp = () => {
             {/* Instant Reply Button (Bouncing Animation) */}
             <motion.button
               onClick={openWhatsApp}
-              animate={{ y: [0, -8, 0] }}
+              animate={{ y: [0, -4, 0] }}
               transition={{
                 repeat: Infinity,
                 duration: 1.5,
                 ease: "easeInOut",
               }}
-              className="flex cursor-pointer bg-gradient-to-r text-white from-[#7683FF] to-[#C77DFF] items-center gap-1.5 md:gap-2 border border-gray-200 px-4 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-full font-semibold transition shadow-md"
+              className="flex cursor-pointer bg-gradient-to-r text-white from-[#4E8EFF] to-[#A072FF] items-center gap-1.5 md:gap-2 border border-gray-200 px-4 py-1.5 md:px-16 md:py-2 text-sm md:text-base rounded-full font-semibold transition shadow-md"
             >
 
    
       {/* Online Dot + Glow Effect */}
       <span className="flex items-center justify-center">
         {/* Glow background */}
-        <span className="absolute w-6 h-6 bg-green-500/40 rounded-full blur-lg drop-glow"></span>
+        <span className="absolute w-6 h-6 bg-green-500/70 rounded-full blur-lg drop-glow"></span>
 
         {/* Main green dot */}
         <FaCircle size={14} className="text-green-500 relative z-10" />

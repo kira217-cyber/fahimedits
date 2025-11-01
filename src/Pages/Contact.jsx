@@ -106,7 +106,7 @@ const Contact = () => {
         }}
       >
         <div className="w-full md:w-1/2 p-4">
-          <h2 className="text-3xl font-bold text-purple-500 mb-4 text-center md:text-left">GET IN TOUCH!</h2>
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight mb-4 text-center md:text-left">GET IN TOUCH!</h2>
           <h3 className="text-xl font-semibold text-gray-700 mb-4">Share Your Idea</h3>
           <p className="text-gray-600 mb-6">For any issues or queries, please use the form below:</p>
           <div className="space-y-4">
@@ -172,7 +172,7 @@ const Contact = () => {
               />
             </div>
             <button
-              className={`w-full cursor-pointer bg-purple-500 text-white p-2 rounded-md hover:bg-purple-600 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`w-full cursor-pointer bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white p-2 rounded-md font-bold ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
               onClick={handleSubmit}
               disabled={isLoading} // লোডিংয়ের সময় বোতাম ডিসেবল
             >
@@ -181,14 +181,14 @@ const Contact = () => {
           </div>
         </div>
         <div className="w-full md:w-1/2 p-4 bg-gray-50 rounded-lg">
-          <h3 className="text-xl font-semibold text-purple-500 mb-4">Here Our Usual Response Times</h3>
+          <h3 className="text-xl font-semibold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight mb-4">Here Our Usual Response Times</h3>
           <ul className="text-gray-600 space-y-2 mb-6">
             <li className="flex items-center">
-              <span className="w-4 h-4 bg-purple-500 rounded-full mr-2"></span>
+              <span className="w-4 h-4 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white rounded-full mr-2"></span>
               Monday – Friday: 1-3 hours
             </li>
             <li className="flex items-center">
-              <span className="w-4 h-4 bg-purple-500 rounded-full mr-2"></span>
+              <span className="w-4 h-4 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white rounded-full mr-2"></span>
               Weekends & Holidays: 12-24 hours
             </li>
           </ul>
@@ -198,18 +198,18 @@ const Contact = () => {
           <p className="text-gray-600 mb-4">
             We are a small team and encourage our staff to have time off which is why we expect slightly slower response times but on urgent issues, we get back ASAP.
           </p>
-          <h3 className="text-xl font-semibold text-purple-500 mb-4">Find Us Online</h3>
+          <h3 className="text-xl font-semibold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight mb-4">Find Us Online</h3>
           <div className="flex items-center gap-4">
-            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
+            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white ">
               <FaFacebookF />
             </div>
-            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
+            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white ">
               <FaInstagram />
             </div>
-            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
+            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white ">
               <FaLinkedinIn />
             </div>
-            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-purple-500 hover:text-white transition">
+            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white ">
               <RiYoutubeFill />
             </div>
           </div>

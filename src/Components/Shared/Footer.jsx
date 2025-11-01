@@ -7,12 +7,20 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaTimes,
+  FaCircle,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 import { RiYoutubeFill } from "react-icons/ri";
 
 const Footer = () => {
+   const phoneNumber = "8801319242789"; // 👉 তোমার WhatsApp নাম্বার এখানে দাও (country code সহ)
+
+
+const openWhatsApp = () => {
+    const whatsappUrl = `https://wa.me/${phoneNumber}`;
+    window.open(whatsappUrl, "_blank");
+  };
   return (
     <motion.footer
       initial={{ opacity: 0, y: 60 }}
@@ -28,15 +36,18 @@ const Footer = () => {
               Shot & Send <br /> Your Moments
             </h2>
             <button
-              onClick={() => {
-                const section = document.getElementById("shot-send");
-                if (section) {
-                  section.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="flex items-center gap-2 bg-gradient-to-r from-[#7683FF] to-[#C77DFF] text-black hover:text-white rounded-full font-medium cursor-pointer  px-5 py-2  transition"
+              onClick={openWhatsApp}
+              className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white leading-tight px-6 py-3 rounded-lg font-semibold transition-all"
             >
-              START YOUR PROJECT <span className="text-xl">→</span>
+              {/* Online Dot + Glow Effect */}
+              <span className="flex items-center justify-center">
+                {/* Glow background */}
+                <span className="absolute w-6 h-6 bg-green-500/60 rounded-full blur-lg drop-glow"></span>
+
+                {/* Main green dot */}
+                <FaCircle size={14} className="text-green-500 relative z-10" />
+              </span>
+              Get Instant Reply
             </button>
           </div>
 
@@ -69,9 +80,30 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-3">Explore</h3>
             <ul className="space-y-2 text-gray-300">
-              <li><Link to={'/terms&conditions'} className="hover:underline hover:text-white">Terms & Conditions</Link></li>
-              <li><Link to={'/refound-policy'} className="hover:underline hover:text-white">Refound Policy</Link></li>
-              <li><Link to={'/privacy-policy'} className="hover:underline hover:text-white">Privacy Policy</Link></li>
+              <li>
+                <Link
+                  to={"/terms&conditions"}
+                  className="hover:underline hover:text-white"
+                >
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={"/refound-policy"}
+                  className="hover:underline hover:text-white"
+                >
+                  Refound Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={"/privacy-policy"}
+                  className="hover:underline hover:text-white"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
             </ul>
           </div>
 

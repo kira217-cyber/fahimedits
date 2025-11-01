@@ -6,16 +6,38 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const videos = [
-  { id: 1, embedUrl: "https://www.youtube.com/embed/Con9guwQbCo?si=g8BpDaZ8eDNWmkGY" },
-  { id: 2, embedUrl: "https://www.youtube.com/embed/mdQH6NrE0ZY?si=KVlvVSP5nIZyoXUp" },
-  { id: 3, embedUrl: "https://www.youtube.com/embed/7nrYfXwkDLE?si=yiw_iexLFI8CHgyM" },
-  { id: 4, embedUrl: "https://www.youtube.com/embed/X7FCOt-CFC8?si=483DAnk_cJRhvbez" },
-  { id: 5, embedUrl: "https://www.youtube.com/embed/hWDBTgDtS6U?si=BrPs2gMRKri2TKWF" },
-  { id: 6, embedUrl: "https://www.youtube.com/embed/yzFlTD_Xmx4?si=OXMhn85G-M3JTU3N" },
-  { id: 7, embedUrl: "https://www.youtube.com/embed/90swdeTvNeM?si=VSA-ir3woUSPnJ34" },
-  { id: 8, embedUrl: "https://www.youtube.com/embed/aUs4BbNwreE?si=PXoDsAACinc6511m" },
-  { id: 9, embedUrl: "https://www.youtube.com/embed/eXHVV2xMAFY?si=S1MawZisxw4QltBr" },
-  { id: 10, embedUrl: "https://www.youtube.com/embed/G8XNUGoDhWg?si=4lpKQ-5segoI71dy" },
+  {
+    id: 1,
+    embedUrl: "https://www.youtube.com/embed/Con9guwQbCo?si=g8BpDaZ8eDNWmkGY",
+  },
+  {
+    id: 2,
+    embedUrl: "https://www.youtube.com/embed/mdQH6NrE0ZY?si=KVlvVSP5nIZyoXUp",
+  },
+  {
+    id: 3,
+    embedUrl: "https://www.youtube.com/embed/7nrYfXwkDLE?si=yiw_iexLFI8CHgyM",
+  },
+  {
+    id: 4,
+    embedUrl: "https://www.youtube.com/embed/X7FCOt-CFC8?si=483DAnk_cJRhvbez",
+  },
+  {
+    id: 5,
+    embedUrl: "https://www.youtube.com/embed/hWDBTgDtS6U?si=BrPs2gMRKri2TKWF",
+  },
+  {
+    id: 6,
+    embedUrl: "https://www.youtube.com/embed/yzFlTD_Xmx4?si=OXMhn85G-M3JTU3N",
+  },
+  {
+    id: 7,
+    embedUrl: "https://www.youtube.com/embed/90swdeTvNeM?si=VSA-ir3woUSPnJ34",
+  },
+  {
+    id: 8,
+    embedUrl: "https://www.youtube.com/embed/aUs4BbNwreE?si=PXoDsAACinc6511m",
+  },
 ];
 
 const LazyYouTube = ({ embedUrl, title }) => {
@@ -40,10 +62,15 @@ const LazyYouTube = ({ embedUrl, title }) => {
 
   // Extract video ID for thumbnail
   const videoId = embedUrl.match(/embed\/([a-zA-Z0-9_-]+)/)?.[1];
-  const thumbnail = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : null;
+  const thumbnail = videoId
+    ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
+    : null;
 
   return (
-    <div ref={ref} className="w-full h-full relative overflow-hidden rounded-2xl">
+    <div
+      ref={ref}
+      className="w-full h-full relative overflow-hidden rounded-2xl"
+    >
       {loaded ? (
         <iframe
           src={embedUrl}
@@ -97,19 +124,23 @@ const OurWork = () => {
   }, [updateSlidesToShow]);
 
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     centerMode: true,
-    centerPadding: slidesToShow === 1 ? "10px" : slidesToShow === 2 ? "20px" : "0px",
+    centerPadding:
+      slidesToShow === 1 ? "10px" : slidesToShow === 2 ? "20px" : "0px",
     slidesToShow,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 8000,
+    autoplaySpeed: 3000,
     speed: 800,
     beforeChange: (_, next) => setCenterIndex(next),
     responsive: [
       { breakpoint: 640, settings: { slidesToShow: 1, centerPadding: "10px" } },
-      { breakpoint: 1024, settings: { slidesToShow: 2, centerPadding: "20px" } },
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 2, centerPadding: "20px" },
+      },
     ],
   };
 
@@ -122,33 +153,41 @@ const OurWork = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 1 }}
-      className="py-8 md:py-24 lg:py-32 px-4 sm:px-6 md:px-12 lg:px-24 text-center bg-white relative overflow-x-hidden"
+      className="min-h-screen md:px-16 lg:px-24 py-16 md:py-32 text-center bg-white relative overflow-x-hidden"
     >
-      <div className="max-w-7xl mx-auto overflow-x-hidden relative">
-        {/* Header */}
-        <div className="space-y-4 mt-2 mb-8 sm:mb-12">
-          <span className="text-sm bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
+      <div className="max-w-7xl mx-auto relative">
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-center mb-12 max-w-3xl mx-auto"
+        >
+          <span className="text-sm bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
             Video Editing Studio
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-snug">
-            Our Made <span className="bg-gradient-to-r from-[#7683FF] to-[#C77DFF] bg-clip-text text-transparent leading-tight">Video Projects</span>
-          </h2>
-          <p className="max-w-lg sm:max-w-xl mx-auto text-sm sm:text-base text-gray-600">
-            We craft stunning videos that inspire, engage, and tell powerful stories.
+          <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-4 leading-tight">
+            We Edit{" "}
+            <span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
+              It All
+            </span>
+          </h1>
+          <p className="mt-4 text-gray-700 md:text-lg">
+            Even If You Have Footages From Your Last Trip
           </p>
-        </div>
+        </motion.div>
 
         {/* Arrows */}
         <button
           onClick={goPrev}
-          className="absolute left-2 sm:left-4 md:left-8 lg:left-16 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-purple-600 hover:bg-purple-500 hover:text-white rounded-full p-2 sm:p-3 z-50 transition-all hover:scale-110"
+          className="absolute cursor-pointer left-2 sm:left-4 md:left-8 lg:left-16 top-80 md:top-110 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-blue-600 rounded-full p-2 sm:p-3 z-50 transition-all hover:scale-110"
         >
           <FiChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
         <button
           onClick={goNext}
-          className="absolute right-2 sm:right-4 md:right-8 lg:right-16 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-purple-600 hover:bg-purple-500 hover:text-white rounded-full p-2 sm:p-3 z-50 transition-all hover:scale-110"
+          className="absolute right-2 cursor-pointer sm:right-4 md:right-8 lg:right-16 top-80 md:top-110 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-blue-600 rounded-full p-2 sm:p-3 z-50 transition-all hover:scale-110"
         >
           <FiChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
@@ -164,7 +203,7 @@ const OurWork = () => {
             return (
               <div
                 key={video.id}
-                className={`px-2 sm:px-3 py-6 sm:py-8 transition-all duration-700 ease-in-out ${scale} overflow-hidden`}
+                className={`py-6 sm:py-8 transition-all duration-700 ease-in-out ${scale} overflow-hidden`}
               >
                 <div className="overflow-hidden shadow-xl bg-white border border-purple-100 hover:shadow-purple-200 transition-shadow duration-500 rounded-2xl h-[200px] sm:h-[250px] md:h-[350px] lg:h-[450px]">
                   <LazyYouTube
