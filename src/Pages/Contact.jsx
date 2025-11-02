@@ -103,7 +103,7 @@ const Contact = () => {
       {/* 🎥 Background Video */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
-        src="/fahimvideo.mp4"
+        src="https://res.cloudinary.com/dhrnufiiz/video/upload/v1762103447/videos/cyhiavdjzrvbkcsvhb1q.mp4"
         autoPlay
         loop
         muted
@@ -193,7 +193,7 @@ const Contact = () => {
                 isLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              {isLoading ? "Loading..." : "Send"}
+              {isLoading ? "Please Wait Sending..." : "Send"}
             </button>
           </div>
         </div>
