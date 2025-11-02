@@ -19,7 +19,7 @@ const CaseStudy = () => {
   const swiperRef = useRef(null);
 
   return (
-    <div className="max-w-7xl mx-auto py-16 md:py-32 text-center bg-white relative">
+    <div id="case-study" className="max-w-7xl mx-auto py-16 md:py-32 text-center bg-white relative">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router"; // ✅ corrected import
+import { Link, NavLink, useLocation } from "react-router";
 import { motion } from "framer-motion";
 import { FiArrowRight, FiMenu, FiX } from "react-icons/fi";
 import { FaCircle } from "react-icons/fa";
@@ -7,14 +7,25 @@ import { FaCircle } from "react-icons/fa";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 100);
   }, []);
 
+  // ✅ Smooth scroll function
+  const handleSmoothScroll = (e, sectionId) => {
+    e.preventDefault();
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false); // close mobile menu
+    }
+  };
+
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Case Study", path: "/case-study" },
+    { name: "Case Study", to: "case-study" },
     { name: "Process", path: "/process" },
     { name: "Contact", path: "/contact" },
   ];
@@ -26,7 +37,7 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed max-w-7xl mx-auto top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-[90%] lg:w-[80%]
        rounded-full shadow-lg px-6 py-3 flex justify-between items-center
-      bg-white/25 backdrop-blur-lg border border-white/30" // ✅ Unified glass effect
+      bg-white/25 backdrop-blur-lg border border-white/30"
     >
       {/* Logo */}
       <Link to={"/"}>
@@ -40,37 +51,43 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex items-center gap-8">
-        {navItems.map((item) => (
-          <NavLink
-            key={item.name}
-            to={item.path}
-            className={({ isActive }) =>
-              `text-md font-medium transition-colors ${
-                isActive
-                  ? "bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent"
-                  : "hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] bg-clip-text hover:text-transparent"
-              }`
-            }
-          >
-            {item.name}
-          </NavLink>
-        ))}
+        {navItems.map((item) =>
+          item.name === "Case Study" ? (
+            <button
+              key={item.name}
+              onClick={(e) => handleSmoothScroll(e, "case-study")}
+              className="text-md font-medium text-base flex cursor-pointer flex-start hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] hover:bg-clip-text hover:text-transparent"
+            >
+              {item.name}
+            </button>
+          ) : (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              className={({ isActive }) =>
+                `text-md font-medium transition-colors ${
+                  isActive
+                    ? "bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent"
+                    : "hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] bg-clip-text hover:text-transparent"
+                }`
+              }
+            >
+              {item.name}
+            </NavLink>
+          )
+        )}
 
         {/* Start a Project Button */}
         <div className="flex items-center gap-2">
           <Link to={"/contact"}>
-          <button
-            className="flex items-center gap-2 cursor-pointer text-sm font-semibold px-4 py-2 rounded-full border border-black/10 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] transition text-white"
-          >
-             {/* Online Dot + Glow Effect */}
+            <button className="flex items-center gap-2 cursor-pointer text-sm font-semibold px-4 py-2 rounded-full border border-black/10 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] transition text-white">
               <span className="flex items-center justify-center">
-                {/* Glow background */}
                 <span className="absolute w-6 h-6 bg-green-500/60 rounded-full blur-lg drop-glow"></span>
-
-                {/* Main green dot */}
                 <FaCircle size={14} className="text-green-500 relative z-10" />
-              </span> Share Idea
-          </button></Link>
+              </span>
+              Share Idea
+            </button>
+          </Link>
           <Link to={"/contact"}>
             <div className="bg-white border border-black/10 cursor-pointer hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white p-2 rounded-full">
               <FiArrowRight />
@@ -95,40 +112,42 @@ const Navbar = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="absolute top-[70px] left-0 w-full bg-white/90 backdrop-blur-3xl shadow-xl rounded-3xl py-5 px-6 flex flex-col gap-4 md:hidden" // ✅ Same glass style as desktop
+          className="absolute top-[70px] left-0 w-full bg-white/90 backdrop-blur-3xl shadow-xl rounded-3xl py-5 px-6 flex flex-col gap-4 md:hidden"
         >
-          {navItems.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.path}
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `text-base font-medium transition-colors ${
-                  isActive
-                    ? "bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent"
-                    : "text-gray-800 hover:bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text"
-                }`
-              }
-            >
-              {item.name}
-            </NavLink>
-          ))}
+          {navItems.map((item) =>
+            item.name === "Case Study" ? (
+              <button
+                key={item.name}
+                onClick={(e) => handleSmoothScroll(e, "case-study")}
+                className="text-base font-medium flex cursor-pointer flex-start hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] hover:bg-clip-text hover:text-transparent"
+              >
+                {item.name}
+              </button>
+            ) : (
+              <NavLink
+                key={item.name}
+                to={item.path}
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `text-base font-medium transition-colors ${
+                    isActive
+                      ? "bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent"
+                      : "text-gray-800 hover:bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text"
+                  }`
+                }
+              >
+                {item.name}
+              </NavLink>
+            )
+          )}
 
           {/* Mobile Button */}
           <div className="flex items-center gap-2 mt-4">
             <Link to={"/contact"}>
               <button className="bg-gradient-to-r flex items-center gap-2 from-[#4E8EFF] to-[#A072FF]  text-white  text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition">
-                {" "}
-                {/* Online Dot + Glow Effect */}
                 <span className="flex items-center justify-center">
-                  {/* Glow background */}
                   <span className="absolute w-6 h-6 bg-green-500/60 rounded-full blur-lg drop-glow"></span>
-
-                  {/* Main green dot */}
-                  <FaCircle
-                    size={14}
-                    className="text-green-500 relative z-10"
-                  />
+                  <FaCircle size={14} className="text-green-500 relative z-10" />
                 </span>
                 Share Idea
               </button>
@@ -136,7 +155,7 @@ const Navbar = () => {
             <Link to={"/contact"}>
               <div className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-white p-2 rounded-full cursor-pointer transition">
                 <FiArrowRight />
-              </div>{" "}
+              </div>
             </Link>
           </div>
         </motion.div>
