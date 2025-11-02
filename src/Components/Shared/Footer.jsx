@@ -14,10 +14,9 @@ import { Link } from "react-router";
 import { RiYoutubeFill } from "react-icons/ri";
 
 const Footer = () => {
-   const phoneNumber = "8801319242789"; // 👉 তোমার WhatsApp নাম্বার এখানে দাও (country code সহ)
+  const phoneNumber = "8801319242789"; // 👉 তোমার WhatsApp নাম্বার এখানে দাও (country code সহ)
 
-
-const openWhatsApp = () => {
+  const openWhatsApp = () => {
     const whatsappUrl = `https://wa.me/${phoneNumber}`;
     window.open(whatsappUrl, "_blank");
   };
@@ -127,7 +126,7 @@ const openWhatsApp = () => {
                 <FaPhoneAlt /> +88 013 1924 2789
               </li>
               <li className="flex items-center gap-2">
-                <FaEnvelope /> fahimedits@123.com
+                <FaEnvelope /> Rahmanfahim581@gmail.com
               </li>
               <li className="flex items-center gap-2">
                 <FaMapMarkerAlt /> 12 Elm street, Australia WCIX 0AA
@@ -137,18 +136,27 @@ const openWhatsApp = () => {
 
           {/* Social Media */}
           <div className="flex items-center gap-4">
-            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
-              <FaFacebookF />
-            </div>
-            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
-              <FaInstagram />
-            </div>
-            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
-              <FaLinkedinIn />
-            </div>
-            <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
-              <RiYoutubeFill />
-            </div>
+            <a target="blank" href="https://www.facebook.com/rahmanfahim34">
+              <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
+                <FaFacebookF />
+              </div>
+            </a>
+            <a target="blank" href="https://www.instagram.com/fahim_rolling">
+              {" "}
+              <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
+                <FaInstagram />
+              </div>
+            </a>
+            <a target="blank" href="https://www.linkedin.com/in/Rahmanfahim34/">
+              <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
+                <FaLinkedinIn />
+              </div>
+            </a>
+            <a target="blank" href="https://www.youtube.com/@FahimEdits2">
+              <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
+                <RiYoutubeFill />
+              </div>
+            </a>
           </div>
         </div>
 

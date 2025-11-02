@@ -7,6 +7,7 @@ import Process from "../Components/Process/Process";
 import Upwork from "../Components/Upwork/Upwork";
 // import WeEdit from "../Components/WeEdit/WeEdit";
 import ShotSend from "../Components/ShotSend/ShotSend";
+import CaseStudy from "../Components/CaseStudy/CaseStudy";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <ProjectIdea></ProjectIdea>
       <Upwork></Upwork>
       <OurWork></OurWork>
+      <CaseStudy></CaseStudy>
        <Process></Process>
       {/* <WeEdit></WeEdit> */}
       {/* <OurTeam></OurTeam> */}
