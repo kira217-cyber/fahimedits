@@ -25,10 +25,10 @@ const Footer = () => {
       initial={{ opacity: 0, y: 60 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      className="bg-[#0A0217] text-white px-6 md:px-16 lg:px-24 py-12 rounded-t-3xl"
+      className="bg-[#0A0217] text-white px-6 md:px-16 lg:px-24 py-12 "
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Left Section */}
           <div>
             <h2 className="text-3xl md:text-4xl font-semibold mb-4 leading-snug">
@@ -107,14 +107,7 @@ const Footer = () => {
           </div>
 
           {/* Utilities */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3">Utilities</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li>Style guide</li>
-              <li>Licenses</li>
-              <li>Protected</li>
-            </ul>
-          </div>
+         
         </div>
 
         {/* Contact Section */}

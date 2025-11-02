@@ -9,12 +9,13 @@ import CaseStudy from "../Components/CaseStudy/CaseStudy";
 
 const Home = () => {
   return (
-    <div>
+    <div className="px-4">
       <Hero></Hero>     
       <ProjectIdea></ProjectIdea>
       <Upwork></Upwork>
       <OurWork></OurWork>
       <CaseStudy></CaseStudy>
+      {/* <Process></Process> */}
       <Process></Process>
       <ShotSend></ShotSend>
     </div>

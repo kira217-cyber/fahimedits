@@ -3,12 +3,11 @@ import { motion } from "framer-motion";
 import FahimVideo from "../../assets/fahimvideo.mp4"; // তোমার নিজের ভিডিও path
 import { FaCircle } from "react-icons/fa";
 import { GoArrowRight } from "react-icons/go";
-import '../../index.css'
+import "../../index.css";
 const Hero = () => {
   const phoneNumber = "8801319242789"; // 👉 তোমার WhatsApp নাম্বার এখানে দাও (country code সহ)
 
-
-const openWhatsApp = () => {
+  const openWhatsApp = () => {
     const whatsappUrl = `https://wa.me/${phoneNumber}`;
     window.open(whatsappUrl, "_blank");
   };
@@ -41,11 +40,12 @@ const openWhatsApp = () => {
                   section.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="flex cursor-pointer items-center gap-1 md:gap-2 border border-gray-200 px-2 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-full font-semibold hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white"
+              className="flex cursor-pointer items-center gap-1 md:gap-2 border border-gray-200 px-4 py-3 md:px-6 md:py-4 text-sm md:text-base rounded-full font-semibold hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white"
             >
-              Share Idea <span className="text-base md:text-xl"><GoArrowRight />
-
-</span>
+              Share Idea{" "}
+              <span className="text-base md:text-xl">
+                <GoArrowRight />
+              </span>
             </button>
 
             {/* Instant Reply Button (Bouncing Animation) */}
@@ -57,19 +57,17 @@ const openWhatsApp = () => {
                 duration: 1.5,
                 ease: "easeInOut",
               }}
-              className="flex cursor-pointer bg-gradient-to-r text-white from-[#4E8EFF] to-[#A072FF] items-center gap-1.5 md:gap-2 border border-gray-200 px-4 py-1.5 md:px-16 md:py-2 text-sm md:text-base rounded-full font-semibold transition shadow-md"
+              className="flex cursor-pointer bg-gradient-to-r text-white from-[#4E8EFF] to-[#A072FF] items-center gap-1.5 md:gap-2 border border-gray-200 px-4 py-3 md:px-16 md:py-4 text-sm md:text-base rounded-full font-semibold transition shadow-md"
             >
+              {/* Online Dot + Glow Effect */}
+              <span className="flex items-center justify-center">
+                {/* Glow background */}
+                <span className="absolute w-6 h-6 bg-green-500/70 rounded-full blur-lg drop-glow"></span>
 
-   
-      {/* Online Dot + Glow Effect */}
-      <span className="flex items-center justify-center">
-        {/* Glow background */}
-        <span className="absolute w-6 h-6 bg-green-500/70 rounded-full blur-lg drop-glow"></span>
-
-        {/* Main green dot */}
-        <FaCircle size={14} className="text-green-500 relative z-10" />
-      </span>
-       Instant Reply{" "}
+                {/* Main green dot */}
+                <FaCircle size={14} className="text-green-500 relative z-10" />
+              </span>
+              Instant Reply{" "}
             </motion.button>
           </div>
         </div>

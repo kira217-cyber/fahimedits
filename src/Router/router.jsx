@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router";
 import RootLayout from "../RootLayout/RootLayout";
 import Home from "../Pages/Home";
 import Contact from "../Pages/Contact";
-import Process from "../Pages/Process";
 import TermsAndConditions from "../Pages/TermsAndConditions";
 import RefoundPolicy from "../Pages/RefoundPolicy";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
@@ -20,10 +19,6 @@ export const routes = createBrowserRouter([
       {
         path: "contact",
         element: <Contact></Contact>,
-      },
-      {
-        path: "process",
-        element: <Process></Process>,
       },
       {
         path: "terms&conditions",

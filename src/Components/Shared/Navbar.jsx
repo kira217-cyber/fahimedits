@@ -25,8 +25,8 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Case Study", to: "case-study" },
-    { name: "Process", path: "/process" },
+    { name: "Case Study", path: "case-study" },
+    { name: "Process", path: "process" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -52,10 +52,11 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <div className="hidden md:flex items-center gap-8">
         {navItems.map((item) =>
-          item.name === "Case Study" ? (
+          // ✅ Smooth scroll for "Case Study" & "Process"
+          item.name === "Case Study" || item.name === "Process" ? (
             <button
               key={item.name}
-              onClick={(e) => handleSmoothScroll(e, "case-study")}
+              onClick={(e) => handleSmoothScroll(e, item.path)}
               className="text-md font-medium text-base flex cursor-pointer flex-start hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] hover:bg-clip-text hover:text-transparent"
             >
               {item.name}
@@ -115,10 +116,10 @@ const Navbar = () => {
           className="absolute top-[70px] left-0 w-full bg-white/90 backdrop-blur-3xl shadow-xl rounded-3xl py-5 px-6 flex flex-col gap-4 md:hidden"
         >
           {navItems.map((item) =>
-            item.name === "Case Study" ? (
+            item.name === "Case Study" || item.name === "Process" ? (
               <button
                 key={item.name}
-                onClick={(e) => handleSmoothScroll(e, "case-study")}
+                onClick={(e) => handleSmoothScroll(e, item.path)}
                 className="text-base font-medium flex cursor-pointer flex-start hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] hover:bg-clip-text hover:text-transparent"
               >
                 {item.name}
