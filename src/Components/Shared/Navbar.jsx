@@ -59,7 +59,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           <Link to={"/contact"}>
           <button
-            className="bg-white flex items-center gap-2 cursor-pointer text-black text-sm font-semibold px-4 py-2 rounded-full border border-black/10 hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white"
+            className="flex items-center gap-2 cursor-pointer text-sm font-semibold px-4 py-2 rounded-full border border-black/10 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] transition text-white"
           >
              {/* Online Dot + Glow Effect */}
               <span className="flex items-center justify-center">

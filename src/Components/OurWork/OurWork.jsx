@@ -153,7 +153,7 @@ const OurWork = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 1 }}
-      className="min-h-screen md:px-16 lg:px-24 py-16 md:py-32 text-center bg-white relative overflow-x-hidden"
+      className="md:px-16 lg:px-24 py-16 md:py-32 text-center bg-white relative overflow-x-hidden"
     >
       <div className="max-w-7xl mx-auto relative">
         {/* Header Section */}
@@ -180,14 +180,14 @@ const OurWork = () => {
         {/* Arrows */}
         <button
           onClick={goPrev}
-          className="absolute cursor-pointer left-2 sm:left-4 md:left-8 lg:left-16 top-80 md:top-110 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-blue-600 rounded-full p-2 sm:p-3 z-50 transition-all hover:scale-110"
+          className="absolute cursor-pointer left-2 sm:left-4 md:left-8 lg:left-16 top-76 md:top-110 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-blue-600 rounded-full p-2 sm:p-3 z-50 transition-all hover:scale-110"
         >
           <FiChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
         <button
           onClick={goNext}
-          className="absolute right-2 cursor-pointer sm:right-4 md:right-8 lg:right-16 top-80 md:top-110 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-blue-600 rounded-full p-2 sm:p-3 z-50 transition-all hover:scale-110"
+          className="absolute right-2 cursor-pointer sm:right-4 md:right-8 lg:right-16 top-76 md:top-110 -translate-y-1/2 bg-white shadow-md hover:shadow-lg border border-purple-100 text-blue-600 rounded-full p-2 sm:p-3 z-50 transition-all hover:scale-110"
         >
           <FiChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
