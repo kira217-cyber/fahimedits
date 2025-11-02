@@ -10,8 +10,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// 🎥 নিজের ভিডিও ফাইল ইমপোর্ট করো
-import BgVideo from "../assets/fahimvideo.mp4"; // ✅ তোমার ভিডিও path বদলাও
 
 const Contact = () => {
   const [firstName, setFirstName] = useState("");
@@ -51,7 +49,7 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5004/api/contact",
+        "http://localhost:5005/api/contact",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -105,11 +103,12 @@ const Contact = () => {
       {/* 🎥 Background Video */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
-        src={BgVideo}
+        src="/fahimvideo.mp4"
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
       ></video>
 
       {/* 🧊 Glassmorphism Overlay */}
@@ -126,9 +125,7 @@ const Contact = () => {
       >
         {/* Left: Form */}
         <div className="w-full md:w-1/2 text-white">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            GET IN TOUCH!
-          </h2>
+          <h2 className="text-3xl font-bold text-white mb-4">GET IN TOUCH!</h2>
           <h3 className="text-xl font-semibold text-gray-200 mb-3">
             Share Your Idea
           </h3>
