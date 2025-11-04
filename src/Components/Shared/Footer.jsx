@@ -60,12 +60,19 @@ const Footer = () => {
               >
                 <li className="mb-2">Home</li>
               </Link>
-              <Link
+              <a
+                href="#case-study"
                 className="cursor-pointer hover:text-white hover:underline"
-                to={"/process"}
+                
+              >
+                <li className="mb-2">Case Study</li>
+              </a>
+              <a
+                href="#process"
+                className="cursor-pointer hover:text-white hover:underline"
               >
                 <li className="mb-2">Process</li>
-              </Link>
+              </a>
               <Link
                 className="cursor-pointer hover:text-white hover:underline"
                 to={"/contact"}
@@ -107,7 +114,6 @@ const Footer = () => {
           </div>
 
           {/* Utilities */}
-         
         </div>
 
         {/* Contact Section */}

@@ -8,35 +8,35 @@ import "slick-carousel/slick/slick-theme.css";
 const videos = [
   {
     id: 1,
-    embedUrl: "https://www.youtube.com/embed/Con9guwQbCo?si=g8BpDaZ8eDNWmkGY",
+    embedUrl: "https://www.youtube.com/embed/rEajo_sJ0to?si=a5f051toigMdjpVi",
   },
   {
     id: 2,
-    embedUrl: "https://www.youtube.com/embed/mdQH6NrE0ZY?si=KVlvVSP5nIZyoXUp",
+    embedUrl: "https://www.youtube.com/embed/VT9EogoqMX8?si=QmBtCX8yQkohjULi",
   },
   {
     id: 3,
-    embedUrl: "https://www.youtube.com/embed/7nrYfXwkDLE?si=yiw_iexLFI8CHgyM",
+    embedUrl: "https://www.youtube.com/embed/tk9G_3q6q1A?si=KjZoyyoFHJLScZCU",
   },
   {
     id: 4,
-    embedUrl: "https://www.youtube.com/embed/X7FCOt-CFC8?si=483DAnk_cJRhvbez",
+    embedUrl: "https://www.youtube.com/embed/GHipDU8I7G4?si=snPzbDzZLmTnT2TJ",
   },
   {
     id: 5,
-    embedUrl: "https://www.youtube.com/embed/hWDBTgDtS6U?si=BrPs2gMRKri2TKWF",
+    embedUrl: "https://www.youtube.com/embed/wUx2ZX9VTTU?si=D_TT_aqtpfkMDKSe",
   },
   {
     id: 6,
-    embedUrl: "https://www.youtube.com/embed/yzFlTD_Xmx4?si=OXMhn85G-M3JTU3N",
+    embedUrl: "https://www.youtube.com/embed/9P5oXzH2uQ4?si=w7xvj_l_bQ84MmPK",
   },
   {
     id: 7,
-    embedUrl: "https://www.youtube.com/embed/90swdeTvNeM?si=VSA-ir3woUSPnJ34",
+    embedUrl: "https://www.youtube.com/embed/BG1fhvwfPKc?si=BLfZWwISy481LKwn",
   },
   {
     id: 8,
-    embedUrl: "https://www.youtube.com/embed/aUs4BbNwreE?si=PXoDsAACinc6511m",
+    embedUrl: "https://www.youtube.com/embed/Rovi_iBETnw?si=eTwHlslFkrdl1YYs",
   },
 ];
 
@@ -163,7 +163,7 @@ const OurWork = () => {
           transition={{ duration: 1 }}
           className="text-center mb-12 max-w-3xl mx-auto"
         >
-          <span className="text-sm bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
+          <span className="text-lg bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
             Video Editing Studio
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-4 leading-tight">

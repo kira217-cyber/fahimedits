@@ -103,7 +103,7 @@ const Contact = () => {
       {/* 🎥 Background Video */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
-        src="https://res.cloudinary.com/dhrnufiiz/video/upload/v1762103447/videos/cyhiavdjzrvbkcsvhb1q.mp4"
+        src="https://res.cloudinary.com/dhrnufiiz/video/upload/v1762292329/videos/uub3lyaevwetnbvlaczh.mp4"
         autoPlay
         loop
         muted

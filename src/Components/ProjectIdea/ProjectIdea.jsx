@@ -31,7 +31,7 @@ const ProjectIdea = () => {
         transition={{ duration: 1 }}
         className="text-center mb-12 max-w-3xl"
       >
-        <span className="text-sm bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
+        <span className="text-lg bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
           Start Your Project
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-4 leading-tight">

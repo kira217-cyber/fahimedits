@@ -1,25 +1,48 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Autoplay, Pagination } from "swiper/modules"; // ✅ Autoplay module added
+import { Autoplay, Pagination } from "swiper/modules";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const CaseStudy = () => {
   const videos = [
-    "https://www.youtube.com/embed/zMiFRVGeRVs?si=QoTjm2U0dA1beEz9",
-    "https://www.youtube.com/embed/XOBx-LgS2PQ?si=HXS1aOWf6AmeSv7d",
-    "https://www.youtube.com/embed/rFgD9MuI51c?si=MMhVegAtrZOAEbbK",
-    "https://www.youtube.com/embed/K2ys12sqaQc?si=LQxnAyYUyyNh7KVt",
-    "https://www.youtube.com/embed/xgr9puQMlik?si=O_QvlwbFqGyET2BB",
+    "https://www.youtube.com/embed/5dlxsN0-3FY?si=ARGwylO4Tw8vTD4b",
+    "https://www.youtube.com/embed/Wx29fNeig6I?si=n97dyqiuglxhqBTl",
+    "https://www.youtube.com/embed/7nrYfXwkDLE?si=UgS-SrEhK5bEUlRe",
+    "https://www.youtube.com/embed/zhxjO_HoXJU?si=6tyfk3-GaFE6yyit",
+    "https://www.youtube.com/embed/vIyhqfN3tOA?si=aOTVRAra6pOyVeuY",
   ];
 
   const swiperRef = useRef(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false); // ট্র্যাক করব কোনো ভিডিও চলছে কি না
+
+  // ভিডিও প্লে হলে autoplay বন্ধ
+  const handleVideoPlay = () => {
+    setIsVideoPlaying(true);
+    swiperRef.current?.autoplay?.stop();
+  };
+
+  // ভিডিওর বাইরে ক্লিক করলে autoplay চালু (পজ মানে ইউজার থামিয়েছে)
+  const handleSlideClick = (e, index) => {
+    // যদি ক্লিক iframe এর বাইরে হয়, তাহলে autoplay চালু
+    if (!e.target.closest("iframe")) {
+      setIsVideoPlaying(false);
+      swiperRef.current?.autoplay?.start();
+    }
+  };
+
+  // স্লাইড চেঞ্জ হলে autoplay চালু (নতুন স্লাইডে গেলে)
+  const handleSlideChange = () => {
+    setIsVideoPlaying(false);
+  };
 
   return (
-    <div id="case-study" className="max-w-7xl mx-auto py-16 md:py-32 text-center bg-white relative">
+    <div
+      id="case-study"
+      className="max-w-7xl mx-auto py-16 md:py-32 text-center bg-white relative"
+    >
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -28,7 +51,7 @@ const CaseStudy = () => {
         viewport={{ once: true }}
         className="text-center mb-12 max-w-3xl mx-auto"
       >
-        <span className="text-sm bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
+        <span className="text-lg bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
           Case Study
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-4 leading-tight">
@@ -42,7 +65,7 @@ const CaseStudy = () => {
         </p>
       </motion.div>
 
-      {/* ✅ Desktop/Tablet Layout */}
+      {/* Desktop/Tablet Layout */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -97,7 +120,7 @@ const CaseStudy = () => {
         </div>
       </motion.div>
 
-      {/* ✅ Mobile Slider (Swiper with Autoplay + Arrows + Dots) */}
+      {/* Mobile Slider */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -120,32 +143,47 @@ const CaseStudy = () => {
           <FiChevronRight className="text-2xl text-gray-700" />
         </button>
 
-        {/* Swiper Component */}
+        {/* Swiper */}
         <Swiper
           modules={[Autoplay, Pagination]}
           pagination={{ clickable: true }}
           spaceBetween={16}
           slidesPerView={1}
-          loop={true} // ✅ Infinite loop
+          loop={true}
           autoplay={{
-            delay: 3000, // ✅ 3 seconds
-            disableOnInteraction: false, // autoplay বন্ধ না হয় ইউজার টাচ করলে
+            delay: 4000, // ৪ সেকেন্ড
+            disableOnInteraction: false,
           }}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
+          onSlideChange={handleSlideChange}
           className="pb-8"
         >
           {videos.map((video, index) => (
-            <SwiperSlide key={index}>
-              <div className="rounded-2xl overflow-hidden shadow-lg">
+            <SwiperSlide
+              key={index}
+              onClick={(e) => handleSlideClick(e, index)}
+            >
+              <div className="rounded-2xl overflow-hidden shadow-lg relative">
                 <iframe
                   src={video}
                   title={`Case Study Video ${index + 1}`}
                   loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="w-full h-56 rounded-2xl"
+                  onPlay={handleVideoPlay} // প্লে হলে থামবে
                 ></iframe>
+
+                {/* ভিডিওর উপরে একটা ওভারলে দিয়ে ক্লিক ডিটেক্ট করা */}
+                <div
+                  className="absolute inset-0 z-10"
+                  onClick={() => {
+                    setIsVideoPlaying(false);
+                    swiperRef.current?.autoplay?.start();
+                  }}
+                ></div>
               </div>
             </SwiperSlide>
           ))}
