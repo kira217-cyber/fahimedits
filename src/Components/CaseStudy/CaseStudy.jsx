@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -16,34 +16,62 @@ const CaseStudy = () => {
   ];
 
   const swiperRef = useRef(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false); // ট্র্যাক করব কোনো ভিডিও চলছে কি না
 
-  // ভিডিও প্লে হলে autoplay বন্ধ
-  const handleVideoPlay = () => {
-    setIsVideoPlaying(true);
-    swiperRef.current?.autoplay?.stop();
-  };
+  // প্রতিটি iframe এর ref
+  const iframeRefs = useRef([]);
 
-  // ভিডিওর বাইরে ক্লিক করলে autoplay চালু (পজ মানে ইউজার থামিয়েছে)
-  const handleSlideClick = (e, index) => {
-    // যদি ক্লিক iframe এর বাইরে হয়, তাহলে autoplay চালু
-    if (!e.target.closest("iframe")) {
-      setIsVideoPlaying(false);
-      swiperRef.current?.autoplay?.start();
-    }
-  };
+  useEffect(() => {
+    // YouTube IFrame API লোড
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  // স্লাইড চেঞ্জ হলে autoplay চালু (নতুন স্লাইডে গেলে)
-  const handleSlideChange = () => {
-    setIsVideoPlaying(false);
-  };
+    let players = [];
+
+    window.onYouTubeIframeAPIReady = () => {
+      iframeRefs.current.forEach((iframe, index) => {
+        if (iframe) {
+          const player = new window.YT.Player(iframe, {
+            events: {
+              onStateChange: (event) => {
+                const swiper = swiperRef.current;
+
+                if (event.data === window.YT.PlayerState.PLAYING) {
+                  // ভিডিও চালু → স্লাইডার থামাও
+                  swiper?.autoplay?.stop();
+                }
+
+                if (
+                  event.data === window.YT.PlayerState.PAUSED ||
+                  event.data === window.YT.PlayerState.ENDED
+                ) {
+                  // ভিডিও পজ/শেষ → স্লাইডার চালু করো (৪ সেকেন্ড)
+                  swiper?.autoplay?.start();
+                  if (swiper?.params?.autoplay) {
+                    swiper.params.autoplay.delay = 4000;
+                  }
+                }
+              },
+            },
+          });
+          players.push(player);
+        }
+      });
+    };
+
+    return () => {
+      players.forEach((p) => p.destroy());
+      delete window.onYouTubeIframeAPIReady;
+    };
+  }, []);
 
   return (
     <div
       id="case-study"
       className="max-w-7xl mx-auto py-16 md:py-32 text-center bg-white relative"
     >
-      {/* Header Section */}
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +93,7 @@ const CaseStudy = () => {
         </p>
       </motion.div>
 
-      {/* Desktop/Tablet Layout */}
+      {/* Desktop Layout */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -73,10 +101,11 @@ const CaseStudy = () => {
         viewport={{ once: true }}
         className="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4"
       >
+        {/* ... আপনার ডেস্কটপ iframe গুলো ... */}
         <div className="sm:col-span-2 lg:col-span-2 rounded-2xl overflow-hidden">
           <iframe
             src={videos[0]}
-            title="Case Study Video 1"
+            title="Video 1"
             loading="lazy"
             allowFullScreen
             className="w-full h-64 md:h-96 rounded-2xl"
@@ -85,7 +114,7 @@ const CaseStudy = () => {
         <div className="rounded-2xl overflow-hidden">
           <iframe
             src={videos[1]}
-            title="Case Study Video 2"
+            title="Video 2"
             loading="lazy"
             allowFullScreen
             className="w-full h-64 md:h-96 rounded-2xl"
@@ -94,7 +123,7 @@ const CaseStudy = () => {
         <div className="rounded-2xl overflow-hidden">
           <iframe
             src={videos[2]}
-            title="Case Study Video 3"
+            title="Video 3"
             loading="lazy"
             allowFullScreen
             className="w-full h-64 md:h-80 rounded-2xl"
@@ -103,7 +132,7 @@ const CaseStudy = () => {
         <div className="rounded-2xl overflow-hidden">
           <iframe
             src={videos[3]}
-            title="Case Study Video 4"
+            title="Video 4"
             loading="lazy"
             allowFullScreen
             className="w-full h-64 md:h-80 rounded-2xl"
@@ -112,7 +141,7 @@ const CaseStudy = () => {
         <div className="rounded-2xl overflow-hidden">
           <iframe
             src={videos[4]}
-            title="Case Study Video 5"
+            title="Video 5"
             loading="lazy"
             allowFullScreen
             className="w-full h-64 md:h-80 rounded-2xl"
@@ -128,17 +157,16 @@ const CaseStudy = () => {
         viewport={{ once: true }}
         className="block sm:hidden px-4 relative"
       >
-        {/* Arrow Buttons */}
+        {/* Arrows */}
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="absolute top-1/2 left-2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md p-2 rounded-full"
+          className="absolute top-1/2 left-2 transform -translate-y-1/2 z-20 bg-white/80 hover:bg-white shadow-md p-2 rounded-full"
         >
           <FiChevronLeft className="text-2xl text-gray-700" />
         </button>
-
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="absolute top-1/2 right-2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md p-2 rounded-full"
+          className="absolute top-1/2 right-2 transform -translate-y-1/2 z-20 bg-white/80 hover:bg-white shadow-md p-2 rounded-full"
         >
           <FiChevronRight className="text-2xl text-gray-700" />
         </button>
@@ -151,39 +179,27 @@ const CaseStudy = () => {
           slidesPerView={1}
           loop={true}
           autoplay={{
-            delay: 4000, // ৪ সেকেন্ড
+            delay: 4000,
             disableOnInteraction: false,
           }}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
-          onSlideChange={handleSlideChange}
           className="pb-8"
         >
           {videos.map((video, index) => (
-            <SwiperSlide
-              key={index}
-              onClick={(e) => handleSlideClick(e, index)}
-            >
-              <div className="rounded-2xl overflow-hidden shadow-lg relative">
+            <SwiperSlide key={index}>
+              <div className="rounded-2xl overflow-hidden shadow-lg">
                 <iframe
-                  src={video}
+                  ref={(el) => (iframeRefs.current[index] = el)}
+                  src={`${video}&enablejsapi=1&playsinline=1`}
                   title={`Case Study Video ${index + 1}`}
                   loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="w-full h-56 rounded-2xl"
-                  onPlay={handleVideoPlay} // প্লে হলে থামবে
+                  // কোনো ওভারলে নেই → ক্লিক করলে ভিডিও প্লে হবে
                 ></iframe>
-
-                {/* ভিডিওর উপরে একটা ওভারলে দিয়ে ক্লিক ডিটেক্ট করা */}
-                <div
-                  className="absolute inset-0 z-10"
-                  onClick={() => {
-                    setIsVideoPlaying(false);
-                    swiperRef.current?.autoplay?.start();
-                  }}
-                ></div>
               </div>
             </SwiperSlide>
           ))}

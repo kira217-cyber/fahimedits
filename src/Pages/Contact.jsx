@@ -10,7 +10,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const Contact = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -49,7 +48,7 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5005/api/contact",
+        `${import.meta.env.VITE_API_URL}/api/contact`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
