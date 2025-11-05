@@ -63,7 +63,6 @@ const Footer = () => {
               <a
                 href="#case-study"
                 className="cursor-pointer hover:text-white hover:underline"
-                
               >
                 <li className="mb-2">Case Study</li>
               </a>
@@ -132,12 +131,12 @@ const Footer = () => {
 
           {/* Social Media */}
           <div className="flex items-center gap-4">
-            <a target="blank" href="https://www.facebook.com/rahmanfahim34">
+            <a target="blank" href="https://www.youtube.com/@FahimEdits2">
               <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
-                <FaFacebookF />
+                <RiYoutubeFill />
               </div>
             </a>
-            <a target="blank" href="https://www.instagram.com/fahim_rolling">
+            <a target="blank" href="https://www.instagram.com/fahim.edits1/">
               {" "}
               <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
                 <FaInstagram />
@@ -146,11 +145,6 @@ const Footer = () => {
             <a target="blank" href="https://www.linkedin.com/in/Rahmanfahim34/">
               <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
                 <FaLinkedinIn />
-              </div>
-            </a>
-            <a target="blank" href="https://www.youtube.com/@FahimEdits2">
-              <div className="w-10 cursor-pointer h-10 flex items-center justify-center bg-transparent border border-gray-600 rounded-full hover:bg-white hover:text-black transition">
-                <RiYoutubeFill />
               </div>
             </a>
           </div>

@@ -42,9 +42,9 @@ const Navbar = () => {
       {/* Logo */}
       <Link to={"/"}>
         <h1 className="text-xl cursor-pointer md:text-2xl font-bold tracking-tight text-black">
-          Fahim
+          
           <span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent">
-            Edits
+          FahimEdits
           </span>
         </h1>
       </Link>

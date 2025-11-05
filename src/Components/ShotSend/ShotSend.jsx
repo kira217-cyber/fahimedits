@@ -4,6 +4,7 @@ import { FiSend, FiUploadCloud } from "react-icons/fi";
 import video from "../../assets/video.jpeg";
 import { FaCircle, FaHornbill } from "react-icons/fa";
 import { Link } from "react-router";
+import { MdOutlineMail } from "react-icons/md";
 
 const ShotSend = () => {
   const phoneNumber = "8801319242789"; // 👉 তোমার WhatsApp নাম্বার এখানে দাও (country code সহ)
@@ -48,9 +49,9 @@ const ShotSend = () => {
         <div className="w-full md:w-1/2 space-y-5">
           <div className="flex flex-wrap justify-center gap-4 mt-6">
             <Link to={"/contact"}>
-              <button className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-transparent bg-clip-text px-6 py-3 rounded-lg font-semibold shadow-md transition-all">
+              <button className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-transparent bg-clip-text px-11 py-3 rounded-lg font-semibold shadow-md transition-all">
                 <span className="text-blue-400">
-                  <FiUploadCloud className="text-xl" />
+                  <MdOutlineMail className="text-xl" />
                 </span>
                 Share Idea
               </button>

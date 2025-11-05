@@ -136,7 +136,7 @@ const Hero = () => {
             {/* Start Project Button */}{" "}
             <Link
               to={"/contact"}
-              className="flex cursor-pointer items-center gap-1 md:gap-2 border border-gray-200 px-4 py-3 md:px-6 md:py-4 text-sm md:text-base rounded-full font-semibold hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition hover:text-white"
+              className="flex cursor-pointer items-center gap-1 md:gap-2 border border-gray-200 px-4 py-3 md:px-6 md:py-4 text-sm md:text-base rounded-full font-semibold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] transition text-white"
             >
               {" "}
               Share Idea{" "}

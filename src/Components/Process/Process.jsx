@@ -29,7 +29,7 @@ const Process = () => {
       items: [
         {
           icon: <RiFolderReceivedFill />,
-          title: "Request Adjustment If Needed",
+          title: "Request Adjustments If Needed",
         },
       ],
       image: gif2,

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router"; // Correct import
-import { FiUploadCloud } from "react-icons/fi"; // Fixed import
+import { MdOutlineMail } from "react-icons/md";
 import { FaCircle } from "react-icons/fa"; // Fixed import
 import "../../index.css";
 const Button = () => {
@@ -16,9 +16,9 @@ const Button = () => {
       <div className="w-full md:w-1/2 space-y-5">
         <div className="flex flex-wrap justify-center gap-4 mb-8">
           <Link to={"/contact"}>
-            <button className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-transparent bg-clip-text px-6 py-3 rounded-lg font-semibold shadow-md transition-all">
+            <button className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-transparent bg-clip-text px-11 py-3 rounded-lg font-semibold shadow-md transition-all">
               <span className="text-blue-400">
-                <FiUploadCloud className="text-xl" />
+                <MdOutlineMail className="text-xl" />
               </span>
               Share Idea
             </button>

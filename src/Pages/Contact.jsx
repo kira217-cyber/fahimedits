@@ -150,20 +150,16 @@ const Contact = () => {
           </h3>
           <div className="flex gap-4">
             <SocialIcon
-              Icon={FaFacebookF}
-              url="https://www.facebook.com/rahmanfahim34"
+              Icon={RiYoutubeFill}
+              url="https://www.youtube.com/@FahimEdits2"
             />
             <SocialIcon
               Icon={FaInstagram}
-              url="https://www.instagram.com/fahim_rolling"
+              url="https://www.instagram.com/fahim.edits1/"
             />
             <SocialIcon
               Icon={FaLinkedinIn}
               url="https://www.linkedin.com/in/Rahmanfahim34/"
-            />
-            <SocialIcon
-              Icon={RiYoutubeFill}
-              url="https://www.youtube.com/@FahimEdits2"
             />
           </div>
         </div>
