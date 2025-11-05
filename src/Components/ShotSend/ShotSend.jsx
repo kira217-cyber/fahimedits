@@ -31,7 +31,7 @@ const ShotSend = () => {
 
         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug">
           <span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
-            Shot & Send
+            Shot & Send <br />
           </span>{" "}
           That’s It.
         </h2>
