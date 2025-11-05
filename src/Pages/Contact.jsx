@@ -14,25 +14,25 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [isAnimated, setIsAnimated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   useEffect(() => {
     setIsAnimated(true);
   }, []);
 
+  // ✅ ভিডিও ফাইল সিলেকশন চেক
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (!selectedFile) return;
 
-    // Check file type
     if (!selectedFile.type.startsWith("video/")) {
       toast.error("Please select a video file!", { theme: "colored" });
       return;
     }
 
-    // Check file size (75MB = 75 * 1024 * 1024 bytes)
-    const maxSize = 75 * 1024 * 1024;
+    const maxSize = 100 * 1024 * 1024; // 100MB
     if (selectedFile.size > maxSize) {
-      toast.error("Video too large! Max 75MB allowed.", { theme: "colored" });
+      toast.error("Video too large! Max 100MB allowed.", { theme: "colored" });
       e.target.value = null;
       return;
     }
@@ -50,6 +50,43 @@ const Contact = () => {
     );
   };
 
+  // ✅ ভিডিও Cloudinary তে সরাসরি আপলোড
+  const uploadToCloudinary = async () => {
+    try {
+      const sigRes = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/signature`
+      );
+      const { timestamp, signature, cloudName, apiKey } = sigRes.data;
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("api_key", apiKey);
+      formData.append("timestamp", timestamp);
+      formData.append("signature", signature);
+      formData.append("folder", "videos");
+
+      const uploadRes = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
+        formData,
+        {
+          onUploadProgress: (progressEvent) => {
+            const percent = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(percent);
+          },
+        }
+      );
+
+      return uploadRes.data.secure_url;
+    } catch (error) {
+      console.error("Cloudinary Upload Error:", error);
+      toast.error("Video upload failed!", { theme: "colored" });
+      throw error;
+    }
+  };
+
+  // ✅ Submit Function
   const handleSubmit = async () => {
     if (!firstName || !lastName || !email || !subject || !message) {
       toast.error("Please fill all required fields!", { theme: "colored" });
@@ -62,22 +99,23 @@ const Contact = () => {
     }
 
     setIsLoading(true);
-
-    const formData = new FormData();
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
-    formData.append("email", email);
-    formData.append("subject", subject);
-    formData.append("message", message);
-    if (file) formData.append("file", file);
+    let videoUrl = "";
 
     try {
+      if (file) {
+        toast.info("Uploading video to Cloudinary...", { theme: "colored" });
+        videoUrl = await uploadToCloudinary();
+      }
+
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/contact`,
-        formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
-          timeout: 300000, // 5 minutes
+          firstName,
+          lastName,
+          email,
+          subject,
+          message,
+          videoUrl,
         }
       );
 
@@ -110,21 +148,11 @@ const Contact = () => {
       setSubject("");
       setMessage("");
       setFile(null);
+      setUploadProgress(0);
       document.querySelector('input[type="file"]').value = "";
     } catch (error) {
       console.error("Submit error:", error);
-
-      if (error.response?.data?.error) {
-        toast.error(error.response.data.error, { theme: "colored" });
-      } else if (error.message.includes("timeout")) {
-        toast.error("Upload taking too long. Try a smaller video.", {
-          theme: "colored",
-        });
-      } else {
-        toast.error("Failed to submit. Please try again.", {
-          theme: "colored",
-        });
-      }
+      toast.error("Failed to submit. Please try again.", { theme: "colored" });
     } finally {
       setIsLoading(false);
     }
@@ -143,7 +171,7 @@ const Contact = () => {
         preload="auto"
       ></video>
 
-      {/* Glassmorphism Overlay */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-[6px]"></div>
 
       {/* Main Content */}
@@ -155,9 +183,9 @@ const Contact = () => {
           transition: "opacity 0.6s ease, transform 0.6s ease",
         }}
       >
-        {/* Left: Form */}
+        {/* Left Form */}
         <div className="w-full md:w-1/2 text-white">
-          <h2 className="text-3xl font-bold text-white mb-4">GET IN TOUCH!</h2>
+          <h2 className="text-3xl font-bold mb-4">GET IN TOUCH!</h2>
           <h3 className="text-xl font-semibold text-gray-200 mb-3">
             Share Your Idea
           </h3>
@@ -196,9 +224,10 @@ const Contact = () => {
               className="w-full bg-white/20 text-white placeholder-gray-300 p-3 rounded-md border border-white/30 focus:outline-none focus:border-white/60 transition"
             />
 
+            {/* File Input */}
             <div>
               <label className="block text-sm text-gray-300 mb-1">
-                Video File (Max 75MB)
+                Video File (Max 100MB)
               </label>
               <input
                 type="file"
@@ -206,13 +235,16 @@ const Contact = () => {
                 onChange={handleFileChange}
                 className="w-full bg-white/20 text-gray-100 p-2 rounded-md border border-white/30 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-[#4E8EFF] file:to-[#A072FF] file:text-white hover:file:opacity-90 cursor-pointer"
               />
-              <p className="text-xs text-gray-300 mt-1">
-                {file
-                  ? `${file.name} (${(file.size / (1024 * 1024)).toFixed(
-                      1
-                    )} MB)`
-                  : "No file chosen"}
-              </p>
+              {uploadProgress > 0 && (
+                <div className="w-full bg-gray-600/50 rounded-md mt-2">
+                  <div
+                    className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-xs text-center text-white p-0.5 rounded-md"
+                    style={{ width: `${uploadProgress}%` }}
+                  >
+                    {uploadProgress}%
+                  </div>
+                </div>
+              )}
             </div>
 
             <textarea
@@ -236,7 +268,7 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Right: Info */}
+        {/* Right Info */}
         <div className="w-full md:w-1/2 text-gray-100">
           <h3 className="text-xl font-semibold text-white mb-3">
             Our Response Times
@@ -257,42 +289,22 @@ const Contact = () => {
             Find Us Online
           </h3>
           <div className="flex gap-4">
-            <a
-              href="https://www.facebook.com/rahmanfahim34"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="w-10 h-10 flex items-center justify-center border border-white/40 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition">
-                <FaFacebookF />
-              </div>
-            </a>
-            <a
-              href="https://www.instagram.com/fahim_rolling"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="w-10 h-10 flex items-center justify-center border border-white/40 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition">
-                <FaInstagram />
-              </div>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/Rahmanfahim34/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="w-10 h-10 flex items-center justify-center border border-white/40 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition">
-                <FaLinkedinIn />
-              </div>
-            </a>
-            <a
-              href="https://www.youtube.com/@FahimEdits2"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="w-10 h-10 flex items-center justify-center border border-white/40 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition">
-                <RiYoutubeFill />
-              </div>
-            </a>
+            <SocialIcon
+              Icon={FaFacebookF}
+              url="https://www.facebook.com/rahmanfahim34"
+            />
+            <SocialIcon
+              Icon={FaInstagram}
+              url="https://www.instagram.com/fahim_rolling"
+            />
+            <SocialIcon
+              Icon={FaLinkedinIn}
+              url="https://www.linkedin.com/in/Rahmanfahim34/"
+            />
+            <SocialIcon
+              Icon={RiYoutubeFill}
+              url="https://www.youtube.com/@FahimEdits2"
+            />
           </div>
         </div>
       </div>
@@ -301,5 +313,14 @@ const Contact = () => {
     </div>
   );
 };
+
+// ✅ Helper for social icon
+const SocialIcon = ({ Icon, url }) => (
+  <a href={url} target="_blank" rel="noreferrer">
+    <div className="w-10 h-10 flex items-center justify-center border border-white/40 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition">
+      <Icon />
+    </div>
+  </a>
+);
 
 export default Contact;
