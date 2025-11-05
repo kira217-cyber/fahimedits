@@ -127,9 +127,6 @@ const Footer = () => {
               <li className="flex items-center gap-2">
                 <FaEnvelope /> Rahmanfahim581@gmail.com
               </li>
-              <li className="flex items-center gap-2">
-                <FaMapMarkerAlt /> 12 Elm street, Australia WCIX 0AA
-              </li>
             </ul>
           </div>
 
