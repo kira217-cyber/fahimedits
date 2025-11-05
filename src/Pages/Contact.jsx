@@ -10,86 +10,18 @@ const Contact = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
-  const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [isAnimated, setIsAnimated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState(0);
 
   useEffect(() => {
     setIsAnimated(true);
   }, []);
 
-  // ✅ ভিডিও ফাইল সিলেকশন চেক
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (!selectedFile) return;
-
-    if (!selectedFile.type.startsWith("video/")) {
-      toast.error("Please select a video file!", { theme: "colored" });
-      return;
-    }
-
-    const maxSize = 100 * 1024 * 1024; // 100MB
-    if (selectedFile.size > maxSize) {
-      toast.error("Video too large! Max 100MB allowed.", { theme: "colored" });
-      e.target.value = null;
-      return;
-    }
-
-    setFile(selectedFile);
-    toast.info(
-      `Selected: ${selectedFile.name} (${(
-        selectedFile.size /
-        (1024 * 1024)
-      ).toFixed(1)} MB)`,
-      {
-        autoClose: 3000,
-        theme: "colored",
-      }
-    );
-  };
-
-  // ✅ ভিডিও Cloudinary তে সরাসরি আপলোড
-  const uploadToCloudinary = async () => {
-    try {
-      const sigRes = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/signature`
-      );
-      const { timestamp, signature, cloudName, apiKey } = sigRes.data;
-
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("api_key", apiKey);
-      formData.append("timestamp", timestamp);
-      formData.append("signature", signature);
-      formData.append("folder", "videos");
-
-      const uploadRes = await axios.post(
-        `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
-        formData,
-        {
-          onUploadProgress: (progressEvent) => {
-            const percent = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total
-            );
-            setUploadProgress(percent);
-          },
-        }
-      );
-
-      return uploadRes.data.secure_url;
-    } catch (error) {
-      console.error("Cloudinary Upload Error:", error);
-      toast.error("Video upload failed!", { theme: "colored" });
-      throw error;
-    }
-  };
-
-  // ✅ Submit Function
+  // ✅ ফর্ম সাবমিট
   const handleSubmit = async () => {
     if (!firstName || !lastName || !email || !subject || !message) {
-      toast.error("Please fill all required fields!", { theme: "colored" });
+      toast.error("Fill in all fields!", { theme: "colored" });
       return;
     }
 
@@ -99,60 +31,26 @@ const Contact = () => {
     }
 
     setIsLoading(true);
-    let videoUrl = "";
 
     try {
-      if (file) {
-        toast.info("Uploading video to Cloudinary...", { theme: "colored" });
-        videoUrl = await uploadToCloudinary();
-      }
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/contact`, {
+        firstName,
+        lastName,
+        email,
+        subject,
+        message,
+      });
 
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/contact`,
-        {
-          firstName,
-          lastName,
-          email,
-          subject,
-          message,
-          videoUrl,
-        }
-      );
+      toast.success("Message Send Successfully!", { theme: "colored" });
 
-      toast.success(
-        <div>
-          <strong>Success!</strong>
-          <br />
-          Your message has been sent!
-          {response.data.videoUrl && (
-            <span>
-              <br />
-              <a
-                href={response.data.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 underline"
-              >
-                View Your Video
-              </a>
-            </span>
-          )}
-        </div>,
-        { autoClose: 8000, theme: "colored" }
-      );
-
-      // Reset form
+      // ফর্ম রিসেট
       setFirstName("");
       setLastName("");
       setEmail("");
       setSubject("");
       setMessage("");
-      setFile(null);
-      setUploadProgress(0);
-      document.querySelector('input[type="file"]').value = "";
     } catch (error) {
-      console.error("Submit error:", error);
-      toast.error("Failed to submit. Please try again.", { theme: "colored" });
+      toast.error("Message Send Error!", { theme: "colored" });
     } finally {
       setIsLoading(false);
     }
@@ -224,29 +122,6 @@ const Contact = () => {
               className="w-full bg-white/20 text-white placeholder-gray-300 p-3 rounded-md border border-white/30 focus:outline-none focus:border-white/60 transition"
             />
 
-            {/* File Input */}
-            <div>
-              <label className="block text-sm text-gray-300 mb-1">
-                Video File (Max 100MB)
-              </label>
-              <input
-                type="file"
-                accept="video/*"
-                onChange={handleFileChange}
-                className="w-full bg-white/20 text-gray-100 p-2 rounded-md border border-white/30 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-[#4E8EFF] file:to-[#A072FF] file:text-white hover:file:opacity-90 cursor-pointer"
-              />
-              {uploadProgress > 0 && (
-                <div className="w-full bg-gray-600/50 rounded-md mt-2">
-                  <div
-                    className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] text-xs text-center text-white p-0.5 rounded-md"
-                    style={{ width: `${uploadProgress}%` }}
-                  >
-                    {uploadProgress}%
-                  </div>
-                </div>
-              )}
-            </div>
-
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -263,7 +138,7 @@ const Contact = () => {
                   : "bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] hover:opacity-90 cursor-pointer"
               } text-white`}
             >
-              {isLoading ? "Sending... Please wait" : "Send Message"}
+              {isLoading ? "Message Sending..." : "Send Message"}
             </button>
           </div>
         </div>
@@ -299,7 +174,7 @@ const Contact = () => {
   );
 };
 
-// ✅ Helper for social icon
+// ✅ Social Icon
 const SocialIcon = ({ Icon, url }) => (
   <a href={url} target="_blank" rel="noreferrer">
     <div className="w-10 h-10 flex items-center justify-center border border-white/40 rounded-full hover:bg-gradient-to-r hover:from-[#4E8EFF] hover:to-[#A072FF] transition">
