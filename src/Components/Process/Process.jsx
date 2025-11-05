@@ -107,12 +107,11 @@ const Process = () => {
                   {feature.items.map((item, i) => (
                     <motion.div
                       key={i}
-                      whileHover={{ scale: 1.02 }}
-                      className="flex items-center justify-center bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 sm:items-center gap-4  p-4 rounded-xl transition-all duration-300"
+                      className="flex items-center justify-center bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight sm:items-center gap-4  p-4 rounded-xl transition-all duration-300"
                     >
                       <div className="text-[#4E8EFF] text-3xl">{item.icon}</div>
                       <div className="text-center">
-                        <h4 className="font-bold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight text-lg mb-1">
+                        <h4 className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight text-lg mb-1">
                           {item.title}
                         </h4>
                       </div>

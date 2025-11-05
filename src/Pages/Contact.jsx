@@ -271,21 +271,6 @@ const Contact = () => {
         {/* Right Info */}
         <div className="w-full md:w-1/2 text-gray-100">
           <h3 className="text-xl font-semibold text-white mb-3">
-            Our Response Times
-          </h3>
-          <ul className="space-y-2 mb-5 text-gray-300">
-            <li>Monday–Friday: 1–3 hours</li>
-            <li>Weekends & Holidays: 12–24 hours</li>
-          </ul>
-          <p className="text-gray-300 mb-3">
-            We are based in +6 GMT and available from 9am – 6pm.
-          </p>
-          <p className="text-gray-300 mb-6">
-            We’re a small team, so response time may vary — but for urgent
-            issues, we get back ASAP!
-          </p>
-
-          <h3 className="text-xl font-semibold text-white mb-3">
             Find Us Online
           </h3>
           <div className="flex gap-4">
