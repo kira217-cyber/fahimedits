@@ -7,12 +7,16 @@ import Upwork from "../Components/Upwork/Upwork";
 import ShotSend from "../Components/ShotSend/ShotSend";
 import CaseStudy from "../Components/CaseStudy/CaseStudy";
 import Button from "../Components/Button/Button";
+import ToggleVideo from "../Components/ToggleVideo/ToggleVideo";
+
+
 // import CaseStudy2 from "../Components/CaseStudy/CaseStudy2";
 
 const Home = () => {
   return (
     <div className="px-4">
-      <Hero></Hero>     
+      <Hero></Hero>
+      <ToggleVideo></ToggleVideo>
       <ProjectIdea></ProjectIdea>
       <Button></Button>
       <Upwork></Upwork>
