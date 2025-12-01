@@ -2,11 +2,13 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import video from "../../assets/fahimvideo.mp4";
 import { TbCaretLeftRightFilled } from "react-icons/tb";
+import { FaPlay, FaPause } from "react-icons/fa";
+import { MdRestartAlt } from "react-icons/md";
+import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
 
-// তোমার আসল ভিডিও লিঙ্ক দাও (public folder এ রাখো অথবা CDN)
 const BEFORE_VIDEO =
   "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
-const AFTER_VIDEO =  video// public/videos/fahimvideo.mp4 রাখো
+const AFTER_VIDEO = video;
 
 const ToggleVideo = () => {
   const containerRef = useRef(null);
@@ -15,15 +17,35 @@ const ToggleVideo = () => {
 
   const [sliderPos, setSliderPos] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [scrubDragging, setScrubDragging] = useState(false);
+
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+
   const [isMuted, setIsMuted] = useState(true);
   const [volume, setVolume] = useState(0.8);
   const [playbackRate, setPlaybackRate] = useState(1);
 
+  const [isControlVisible, setIsControlVisible] = useState(true); // NEW
   const isAfterVisible = sliderPos >= 50;
 
-  // ল্যাগ ফ্রি স্লাইডার
+  // ============================
+  // Mobile Tap to toggle control bar
+  // ============================
+  const handleScreenTap = () => {
+    setIsControlVisible((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (!isControlVisible || window.innerWidth >= 768) return;
+
+    const timer = setTimeout(() => setIsControlVisible(false), 3000);
+    return () => clearTimeout(timer);
+  }, [isControlVisible]);
+
+  // ============================
+  // Slider Handler
+  // ============================
   const updateSlider = useCallback((clientX) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -49,7 +71,7 @@ const ToggleVideo = () => {
   useEffect(() => {
     if (isDragging) {
       window.addEventListener("mousemove", handleMove);
-      window.addEventListener("touchmove", handleMove, { passive: false });
+      window.addEventListener("touchmove", handleMove);
       window.addEventListener("mouseup", stopDrag);
       window.addEventListener("touchend", stopDrag);
     }
@@ -61,73 +83,71 @@ const ToggleVideo = () => {
     };
   }, [isDragging, handleMove]);
 
-  // ভিডিও লোড হলে ডিউরেশন নেওয়া
+  // ============================
+  // Duration
+  // ============================
   useEffect(() => {
     const beforeVid = beforeVideoRef.current;
     const afterVid = afterVideoRef.current;
 
-    const handleLoadedMetadata = () => {
-      if (beforeVid?.duration) setDuration(beforeVid.duration);
-      if (afterVid?.duration && afterVid.duration > duration)
-        setDuration(afterVid.duration);
+    const handleLoaded = () => {
+      const maxDur = Math.max(
+        beforeVid?.duration || 0,
+        afterVid?.duration || 0
+      );
+      setDuration(maxDur);
     };
 
-    beforeVid?.addEventListener("loadedmetadata", handleLoadedMetadata);
-    afterVid?.addEventListener("loadedmetadata", handleLoadedMetadata);
+    beforeVid?.addEventListener("loadedmetadata", handleLoaded);
+    afterVid?.addEventListener("loadedmetadata", handleLoaded);
 
     return () => {
-      beforeVid?.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      afterVid?.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      beforeVid?.removeEventListener("loadedmetadata", handleLoaded);
+      afterVid?.removeEventListener("loadedmetadata", handleLoaded);
     };
   }, []);
 
-  // টাইম আপডেট (দৃশ্যমান ভিডিও থেকে)
   useEffect(() => {
-    const activeVideo = isAfterVisible
+    const active = isAfterVisible
       ? afterVideoRef.current
       : beforeVideoRef.current;
-    if (!activeVideo) return;
 
-    const updateTime = () => setCurrentTime(activeVideo.currentTime);
-    const interval = setInterval(updateTime, 100);
+    if (!active) return;
+
+    const interval = setInterval(() => setCurrentTime(active.currentTime), 150);
 
     return () => clearInterval(interval);
   }, [isAfterVisible]);
 
-  // ভিডিও কন্ট্রোল + সিঙ্ক
+  // ============================
+  // Sync + Settings
+  // ============================
   useEffect(() => {
-    if (!beforeVideoRef.current || !afterVideoRef.current) return;
+    const before = beforeVideoRef.current;
+    const after = afterVideoRef.current;
 
-    const beforeVid = beforeVideoRef.current;
-    const afterVid = afterVideoRef.current;
+    before.volume = after.volume = isMuted ? 0 : volume;
+    before.playbackRate = after.playbackRate = playbackRate;
 
-    // সাধারণ সেটিং
-    beforeVid.volume = isMuted ? 0 : volume;
-    afterVid.volume = isMuted ? 0 : volume;
-    beforeVid.playbackRate = playbackRate;
-    afterVid.playbackRate = playbackRate;
-
-    // শুধু দৃশ্যমানটা চালাও
     if (isAfterVisible) {
-      afterVid.play().catch(() => {});
-      beforeVid.pause();
+      after.play().catch(() => {});
+      before.pause();
     } else {
-      beforeVid.play().catch(() => {});
-      afterVid.pause();
+      before.play().catch(() => {});
+      after.pause();
     }
 
-    // সিঙ্ক রাখা
-    if (Math.abs(beforeVid.currentTime - afterVid.currentTime) > 0.5) {
-      afterVid.currentTime = beforeVid.currentTime;
+    if (Math.abs(before.currentTime - after.currentTime) > 0.4) {
+      after.currentTime = before.currentTime;
     }
   }, [isAfterVisible, isMuted, volume, playbackRate]);
 
+  // ============================
+  // Controls
+  // ============================
   const togglePlayPause = () => {
-    const active = isAfterVisible
-      ? afterVideoRef.current
-      : beforeVideoRef.current;
-    if (active.paused) active.play();
-    else active.pause();
+    const v = isAfterVisible ? afterVideoRef.current : beforeVideoRef.current;
+    v.paused ? v.play() : v.pause();
   };
 
   const restart = () => {
@@ -135,26 +155,61 @@ const ToggleVideo = () => {
     afterVideoRef.current.currentTime = 0;
   };
 
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  const startScrub = () => setScrubDragging(true);
+  const stopScrub = () => setScrubDragging(false);
+
+  const handleScrubMove = (e) => {
+    if (!scrubDragging || !containerRef.current) return;
+
+    const rect = e.target.getBoundingClientRect();
+    const position = e.clientX - rect.left;
+    const percent = Math.max(0, Math.min(1, position / rect.width));
+    const newTime = percent * duration;
+
+    beforeVideoRef.current.currentTime = newTime;
+    afterVideoRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
   };
 
+  useEffect(() => {
+    if (scrubDragging) {
+      window.addEventListener("mousemove", handleScrubMove);
+      window.addEventListener("mouseup", stopScrub);
+    }
+    return () => {
+      window.removeEventListener("mousemove", handleScrubMove);
+      window.removeEventListener("mouseup", stopScrub);
+    };
+  }, [scrubDragging]);
+
+  const formatTime = (sec) => {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60)
+      .toString()
+      .padStart(2, "0");
+    return `${m}:${s}`;
+  };
+
+  // ============================
+  // UI Rendering
+  // ============================
   return (
-    <div className="relative w-full max-w-6xl mx-auto bg-black rounded-3xl overflow-hidden shadow-2xl">
+    <div
+      className="relative w-full max-w-6xl mx-auto bg-black rounded-2xl overflow-hidden shadow-xl"
+      onClick={handleScreenTap} // NEW
+    >
       <div ref={containerRef} className="relative aspect-video select-none">
-        {/* Before Video */}
+        {/* BEFORE video */}
         <video
           ref={beforeVideoRef}
           src={BEFORE_VIDEO}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-contain"
           loop
           playsInline
           preload="auto"
         />
 
-        {/* After Video */}
+        {/* AFTER video */}
         <div
           className="absolute inset-0 overflow-hidden"
           style={{
@@ -164,77 +219,148 @@ const ToggleVideo = () => {
           <video
             ref={afterVideoRef}
             src={AFTER_VIDEO}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-contain"
             loop
             playsInline
             preload="auto"
           />
         </div>
 
-     
-        {/* Slider Handle */}
+        {/* SLIDER HANDLE */}
         <div
-          className="absolute inset-y-0 w-2 bg-white/90 z-40 cursor-ew-resize shadow-2xl"
+          className="absolute inset-y-0 w-1 md:w-2 bg-white/90 z-40 cursor-ew-resize"
           style={{ left: `${sliderPos}%`, transform: "translateX(-50%)" }}
           onMouseDown={startDrag}
           onTouchStart={startDrag}
         >
-          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-[42%] w-10 h-10 bg-white rounded-full shadow-2xl flex items-center justify-center">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center">
             <TbCaretLeftRightFilled />
-
           </div>
         </div>
 
-        {/* Control Bar + Duration */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 z-50">
-          <div className="space-y-4">
-            {/* Duration Bar */}
-            <div className="flex items-center gap-4 text-white">
-              <span className="text-sm font-medium">
-                {formatTime(currentTime)}
-              </span>
-              <div className="flex-1 h-2 bg-white/30 rounded-full overflow-hidden">
+        {/* CONTROL BAR (mobile hide/show) */}
+        {isControlVisible && (
+          <div className="absolute bottom-0 left-0 right-0 bg-black/20 p-1 md:p-4 transition-opacity duration-300">
+            {/* TIMELINE */}
+            {/* TIMELINE */}
+            <div className="flex items-center gap-2 text-white text-xs md:text-sm">
+              <span>{formatTime(currentTime)}</span>
+
+              <div
+                className="flex-1 h-1 md:h-2 bg-white/25 rounded-full relative cursor-pointer"
+                onMouseDown={(e) => {
+                  e.stopPropagation();
+                  startScrub();
+                  handleScrubMove(e);
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!containerRef.current) return;
+
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const clickX = e.clientX - rect.left;
+                  const percent = Math.max(0, Math.min(1, clickX / rect.width));
+
+                  // ✅ দুই ভিডিও duration ভিন্ন হলে percent অনুযায়ী set করা
+                  const beforeNewTime =
+                    percent * (beforeVideoRef.current?.duration || 0);
+                  const afterNewTime =
+                    percent * (afterVideoRef.current?.duration || 0);
+
+                  beforeVideoRef.current.currentTime = beforeNewTime;
+                  afterVideoRef.current.currentTime = afterNewTime;
+
+                  // currentTime update (slider filled part show করার জন্য, active video duration অনুযায়ী)
+                  const activeDuration =
+                    sliderPos >= 50
+                      ? afterVideoRef.current?.duration || 1
+                      : beforeVideoRef.current?.duration || 1;
+
+                  setCurrentTime(percent * activeDuration);
+                }}
+              >
+                {/* Filled part */}
                 <div
-                  className="h-full bg-emerald-500 transition-all duration-300"
+                  className="absolute h-full cursor-pointer bg-emerald-500 rounded-full transition-all duration-150 ease-linear"
                   style={{
                     width: `${
-                      duration > 0 ? (currentTime / duration) * 100 : 0
+                      sliderPos >= 50
+                        ? (afterVideoRef.current?.currentTime /
+                            (afterVideoRef.current?.duration || 1)) *
+                          100
+                        : (beforeVideoRef.current?.currentTime /
+                            (beforeVideoRef.current?.duration || 1)) *
+                          100
                     }%`,
                   }}
-                />
+                ></div>
+
+                {/* Current Time Handle */}
+                <div
+                  className="absolute cursor-pointer top-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 bg-white rounded-full shadow-lg pointer-events-none"
+                  style={{
+                    left: `${
+                      sliderPos >= 50
+                        ? (afterVideoRef.current?.currentTime /
+                            (afterVideoRef.current?.duration || 1)) *
+                          100
+                        : (beforeVideoRef.current?.currentTime /
+                            (beforeVideoRef.current?.duration || 1)) *
+                          100
+                    }%`,
+                  }}
+                ></div>
               </div>
-              <span className="text-sm font-medium">
-                {formatTime(duration)}
+
+              <span>
+                {formatTime(
+                  sliderPos >= 50
+                    ? afterVideoRef.current?.duration || 0
+                    : beforeVideoRef.current?.duration || 0
+                )}
               </span>
             </div>
 
-            {/* Controls */}
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            {/* BUTTONS */}
+            <div className="flex items-center justify-center flex-wrap gap-3 mt-3">
               <button
-                onClick={togglePlayPause}
-                className="px-8 py-4 bg-white/20 hover:bg-white/40 rounded-full backdrop-blur-md transition font-bold text-lg"
+                onClick={(e) => {
+                  e.stopPropagation(); // ⛔ parent click বন্ধ
+                  togglePlayPause();
+                }}
+                className="p-2 bg-white/20 cursor-pointer hover:bg-white/40 rounded-full text-white"
               >
-                {isAfterVisible
-                  ? afterVideoRef.current?.paused
-                    ? "Play"
-                    : "Pause"
-                  : beforeVideoRef.current?.paused
-                  ? "Play"
-                  : "Pause"}
+                {isAfterVisible ? (
+                  afterVideoRef.current?.paused ? (
+                    <FaPlay size={16} />
+                  ) : (
+                    <FaPause size={16} />
+                  )
+                ) : beforeVideoRef.current?.paused ? (
+                  <FaPlay size={16} />
+                ) : (
+                  <FaPause size={16} />
+                )}
               </button>
 
               <button
-                onClick={restart}
-                className="px-6 py-3 bg-white/20 hover:bg-white/40 rounded-xl backdrop-blur-md transition font-medium"
+                onClick={(e) => {
+                  e.stopPropagation(); // ⛔ parent click বন্ধ
+                  restart();
+                }}
+                className="p-2 bg-white/20 cursor-pointer hover:bg-white/40 rounded-full text-white"
               >
-                Restart
+                <MdRestartAlt size={16} />
               </button>
 
               <button
-                onClick={() => setIsMuted(!isMuted)}
-                className="px-6 py-3 bg-white/20 hover:bg-white/40 rounded-xl backdrop-blur-md transition font-medium"
+                onClick={(e) => {
+                  e.stopPropagation(); // ⛔ parent click বন্ধ
+                  setIsMuted(!isMuted);
+                }}
+                className="p-2 bg-white/20 cursor-pointer hover:bg-white/40 rounded-full text-white"
               >
-                {isMuted ? "Unmute" : "Mute"}
+                {isMuted ? <HiVolumeOff size={16} /> : <HiVolumeUp size={16} />}
               </button>
 
               <input
@@ -243,24 +369,29 @@ const ToggleVideo = () => {
                 max="1"
                 step="0.1"
                 value={volume}
+                onClick={(e) => e.stopPropagation()} // ⛔ parent click বন্ধ
                 onChange={(e) => setVolume(parseFloat(e.target.value))}
-                className="w-32 accent-emerald-500"
+                className="w-12 md:w-32 h-1 md:h-3 cursor-pointer accent-emerald-500"
               />
 
               <select
                 value={playbackRate}
-                onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
-                className="px-4 py-3 bg-white/20 rounded-xl backdrop-blur-md text-black"
+                onClick={(e) => e.stopPropagation()} // ⛔ parent click বন্ধ
+                onChange={(e) => {
+                  e.stopPropagation(); // ⛔ change event থেকেও parent বন্ধ
+                  setPlaybackRate(parseFloat(e.target.value));
+                }}
+                className="px-2 py-1 md:px-3 cursor-pointer md:py-2 rounded-lg bg-white/30 text-white"
               >
-                {[0.5, 0.75, 1, 1.25, 1.5, 2].map((rate) => (
-                  <option key={rate} value={rate}>
-                    {rate}x
+                {[0.5, 1, 1.25, 1.5, 2].map((r) => (
+                  <option key={r} value={r} className="text-black">
+                    {r}x
                   </option>
                 ))}
               </select>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
