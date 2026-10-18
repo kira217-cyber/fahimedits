@@ -37,7 +37,7 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed max-w-7xl mx-auto top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-[90%] lg:w-[80%]
        rounded-full shadow-lg px-6 py-3 flex justify-between items-center
-      bg-white/25 backdrop-blur-lg border border-white/30"
+      bg-white/85 backdrop-blur-lg border border-white/60"
     >
       {/* Logo */}
       <Link to={"/"}>

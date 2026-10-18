@@ -6,6 +6,7 @@ import Contact from "../Pages/Contact";
 import TermsAndConditions from "../Pages/TermsAndConditions";
 import RefoundPolicy from "../Pages/RefoundPolicy";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
+import Work from "../Pages/Work";
 
 export const routes = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ export const routes = createBrowserRouter([
       {
         index: true,
         element: <Home></Home>,
+      },
+      {
+        path: "work/:slug",
+        element: <Work></Work>,
       },
       {
         path: "contact",

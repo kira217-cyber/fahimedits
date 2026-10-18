@@ -130,43 +130,37 @@ const Hero = () => {
             No locked contracts — one-off, monthly, or custom. Always built
             around your workflow.
           </p>
-          {/* ---------- Buttons ---------- */}{" "}
-          <div className="flex items-center justify-center lg:justify-start gap-2 md:gap-4 ">
-            {" "}
-            {/* Start Project Button */}{" "}
-            <Link
-              to={"/contact"}
-              className="flex cursor-pointer items-center gap-1 md:gap-2 border border-gray-200 px-4 py-3 md:px-6 md:py-4 text-sm md:text-base rounded-full font-semibold bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] transition text-white"
-            >
-              {" "}
-              Share Idea{" "}
-              <span className="text-base md:text-xl">
-                {" "}
-                <GoArrowRight />{" "}
-              </span>{" "}
-            </Link>{" "}
-            {/* Instant Reply Button (Bouncing Animation) */}{" "}
+          {/* ---------- Buttons ---------- */}
+          <div className="flex items-center justify-center gap-2 md:gap-4 lg:justify-start">
+            {/* ১. Instant Reply — WhatsApp */}
             <motion.button
               onClick={() => window.open(`https://wa.me/${phoneNumber}`, "_blank")}
               animate={{ y: [0, -4, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 1.5,
-                ease: "easeInOut",
-              }}
-              className="flex cursor-pointer bg-gradient-to-r text-white from-[#4E8EFF] to-[#A072FF] items-center gap-1.5 md:gap-2 border border-gray-200 px-4 py-3 md:px-16 md:py-4 text-sm md:text-base rounded-full font-semibold transition shadow-md"
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              className="flex cursor-pointer items-center gap-1.5 rounded-full border border-gray-200 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] px-4 py-3 text-sm font-semibold text-white shadow-md transition md:gap-2 md:px-10 md:py-4 md:text-base"
             >
-              {" "}
-              {/* Online Dot + Glow Effect */}{" "}
               <span className="flex items-center justify-center">
-                {" "}
-                {/* Glow background */}{" "}
-                <span className="absolute w-6 h-6 bg-green-500/70 rounded-full blur-lg drop-glow"></span>{" "}
-                {/* Main green dot */}{" "}
-                <FaCircle size={14} className="text-green-500 relative z-10" />{" "}
-              </span>{" "}
-              Instant Reply{" "}
-            </motion.button>{" "}
+                <span className="drop-glow absolute h-6 w-6 rounded-full bg-green-500/70 blur-lg"></span>
+                <FaCircle size={14} className="relative z-10 text-green-500" />
+              </span>
+              Instant Reply
+            </motion.button>
+
+            {/* ২. See Pricing — "No Hidden Fees" সেকশনে নিয়ে যায় */}
+            <button
+              type="button"
+              onClick={() =>
+                document
+                  .getElementById("pricing")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="flex cursor-pointer items-center gap-1 rounded-full border border-gray-300 px-4 py-3 text-sm font-semibold text-gray-900 transition hover:border-gray-500 md:gap-2 md:px-6 md:py-4 md:text-base"
+            >
+              See Pricing
+              <span className="text-base md:text-xl">
+                <GoArrowRight />
+              </span>
+            </button>
           </div>
         </div>
 

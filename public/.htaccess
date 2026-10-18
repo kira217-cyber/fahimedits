@@ -1,0 +1,39 @@
+# ── Hostinger / Apache ──────────────────────────────────────
+# Netlify এর _redirects এখানে কাজ করে না, তাই একই কাজ
+# Apache এর ভাষায় লেখা হলো।
+
+# ১) SPA routing — /contact এর মতো URL সরাসরি খুললেও
+#    index.html ই দেওয়া হবে, 404 নয়।
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # আসল ফাইল বা ফোল্ডার হলে সেটাই দাও
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # বাকি সব index.html এ
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# ২) ভিডিও/ছবি/JS/CSS লম্বা সময় ক্যাশে থাকুক (নামে hash আছে)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType video/mp4        "access plus 1 year"
+  ExpiresByType image/jpeg       "access plus 1 year"
+  ExpiresByType image/png        "access plus 1 year"
+  ExpiresByType text/css         "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/html        "access plus 0 seconds"
+</IfModule>
+
+# ৩) টেক্সট ফাইল gzip করে পাঠানো
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# ৪) ভিডিও seek করার জন্য range request দরকার
+<IfModule mod_headers.c>
+  Header set Accept-Ranges bytes
+</IfModule>

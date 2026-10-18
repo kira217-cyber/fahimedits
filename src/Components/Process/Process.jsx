@@ -1,128 +1,85 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { BsFillSendFill } from "react-icons/bs";
-import { FaCloudDownloadAlt } from "react-icons/fa";
-import { RiFolderReceivedFill } from "react-icons/ri";
-import gif1 from "../../assets/gif1.gif";
-import gif2 from "../../assets/gif2.gif";
-import gif3 from "../../assets/gif3.gif";
 
+/**
+ * উল্লম্ব টাইমলাইন — বাঁয়ে নম্বরের গোল, পাশে শিরোনাম ও বিবরণ।
+ * গঠনটা fahimedits.net এর মতো, কিন্তু রঙ ও ফন্ট মূল সাইটেরই
+ * (নীল → বেগুনি গ্রেডিয়েন্ট, সাদা পটভূমি)।
+ */
 const Process = () => {
-  // Scroll animation variants
-  const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  const features = [
+  const steps = [
     {
-      id: 1,
-      title: "1. Send Brief & Footage.",
-      items: [
-        { icon: <BsFillSendFill />, title: "Via Your Favourite Cloud Storage" },
-      ],
-      image: gif1,
+      no: "01",
+      title: "Send Brief & Footage",
+      body: "Drop your raw files on Google Drive, Dropbox or WeTransfer — whatever you already use. A short note on the style is enough to get started.",
     },
     {
-      id: 2,
-      title: "2. Receive & Review.",
-      items: [
-        {
-          icon: <RiFolderReceivedFill />,
-          title: "Request Adjustments If Needed",
-        },
-      ],
-      image: gif2,
+      no: "02",
+      title: "Receive & Review",
+      body: "The first cut lands in your inbox with a review link. Leave your notes right on the timeline and request adjustments if anything needs changing.",
     },
     {
-      id: 3,
-      title: "3. Download.",
-      items: [{ icon: <FaCloudDownloadAlt />, title: "In Any Format & Size" }],
-      image: gif3,
+      no: "03",
+      title: "Download",
+      body: "Final export in any format and size you need — ready to publish, with project files handed over on request.",
     },
   ];
 
   return (
     <section
       id="process"
-      className="py-16 md:py-32 md:px-16 lg:px-24 bg-white overflow-hidden"
+      className="overflow-hidden bg-white py-16 sm:px-8 md:px-16 md:py-32 lg:px-24"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
+      <div className="mx-auto max-w-3xl">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={fadeUp}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12 "
+          transition={{ duration: 0.7 }}
+          className="text-center"
         >
-          <span className="text-lg bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight border border-gray-200 px-4 py-1 rounded-full font-medium">
+          <span className="rounded-full border border-gray-200 bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text px-4 py-1 text-lg font-medium leading-tight text-transparent">
             Simple Process
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug mt-4">
-            Shoot & Send, <br />{" "}
-            <span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
-              {" "}
-              That’s It
+          <h2 className="mt-4 text-3xl font-bold leading-snug text-gray-900 md:text-5xl">
+            Shoot &amp; Send,{" "}
+            <span className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text leading-tight text-transparent">
+              That&rsquo;s It
             </span>
           </h2>
         </motion.div>
-      </div>
-      <section>
-        <div className="max-w-7xl mx-auto space-y-24">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.id}
-              initial={{ opacity: 0, y: 80 }}
+
+        <ol className="relative mt-14 space-y-10">
+          {/* গোলগুলোর মাঝ বরাবর উল্লম্ব রেখা */}
+          <span
+            aria-hidden="true"
+            className="absolute bottom-6 left-[1.375rem] top-6 w-px bg-gradient-to-b from-[#4E8EFF] to-[#A072FF] opacity-30"
+          />
+
+          {steps.map((step, index) => (
+            <motion.li
+              key={step.no}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className={`flex flex-col ${
-                index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-              } items-center gap-10`}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.12 }}
+              className="relative flex gap-5 sm:gap-6"
             >
-              {/* Image Section */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="w-full lg:w-1/2 flex justify-center"
-              >
-                <div className="rounded-xl overflow-hidden shadow-xl">
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="w-80 h-60 md:w-[460px] md:h-[400px]"
-                  />
-                </div>
-              </motion.div>
-
-              {/* Content Section */}
-              <div className="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
-                <h2 className="text-2xl text-center sm:text-3xl md:text-4xl font-bold  bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight">
-                  {feature.title}
-                </h2>
-
-                <div className="space-y-5">
-                  {feature.items.map((item, i) => (
-                    <motion.div
-                      key={i}
-                      className="flex items-center justify-center bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight sm:items-center gap-4  p-4 rounded-xl transition-all duration-300"
-                    >
-                      <div className="text-[#4E8EFF] text-3xl">{item.icon}</div>
-                      <div className="text-center">
-                        <h4 className="bg-gradient-to-r from-[#4E8EFF] to-[#A072FF] bg-clip-text text-transparent leading-tight text-lg mb-1">
-                          {item.title}
-                        </h4>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+              <span className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#3F6FDB] bg-gradient-to-br from-[#3F6FDB] to-[#7C4DDB] text-sm font-semibold text-white shadow-md">
+                {step.no}
+              </span>
+              <div className="pt-1.5">
+                <h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
+                  {step.title}
+                </h3>
+                <p className="mt-2 leading-relaxed text-gray-600">
+                  {step.body}
+                </p>
               </div>
-            </motion.div>
+            </motion.li>
           ))}
-        </div>
-      </section>
+        </ol>
+      </div>
     </section>
   );
 };
